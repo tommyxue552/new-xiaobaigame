@@ -11,7 +11,7 @@ from backend.core.config import settings
 from backend.core.database import Base
 
 # Load all models so Base.metadata is populated
-# import backend.models  # noqa: F401 - uncomment when models exist
+import backend.models  # noqa: F401
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
