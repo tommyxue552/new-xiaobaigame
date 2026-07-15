@@ -283,6 +283,8 @@ GET /api/v1/games?page=1&page_size=20&sort_by=created_at&sort_order=desc&categor
 - 数据可恢复，不会物理删除
 - 返回 200 + 成功消息
 
+---
+
 ## Category API (v0.4.0)
 
 ### 公开接口
@@ -523,4 +525,222 @@ GET /api/v1/games?page=1&page_size=20&sort_by=created_at&sort_order=desc&categor
 
 ---
 
-*最后更新：2026-07-15 | v0.4.0*
+## Download API (v0.5.0)
+
+### 公开接口
+
+#### GET /api/v1/games/{slug}/downloads
+
+获取指定游戏的所有可用下载资源。
+
+只返回状态为 `active` 且渠道已启用的下载资源。
+
+**路径参数**：
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| slug | string | 游戏 URL 标识 |
+
+**响应**：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "game_id": "uuid",
+    "game_title": "游戏标题",
+    "game_slug": "game-slug",
+    "downloads": [
+      {
+        "id": "uuid",
+        "game_id": "uuid",
+        "provider": {
+          "id": "uuid",
+          "name": "百度网盘",
+          "slug": "baidu",
+          "icon_url": null
+        },
+        "download_url": "https://pan.baidu.com/s/xxxx",
+        "extract_code": "abcd",
+        "priority": 0,
+        "status": "active",
+        "notes": "含 DLC"
+      }
+    ]
+  }
+}
+```
+
+### 管理接口 — 下载资源
+
+> 注意：v0.5.0 版本暂无权限守卫，后续版本将添加认证。
+
+#### GET /api/v1/admin/downloads
+
+下载资源列表，支持分页和按游戏筛选。
+
+**查询参数**：
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| page | int | 1 | 页码 (>=1) |
+| page_size | int | 20 | 每页数量 (1-100) |
+| game_id | uuid | - | 按游戏 ID 筛选 |
+
+**响应**：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "items": [
+      {
+        "id": "uuid",
+        "game_id": "uuid",
+        "provider": {
+          "id": "uuid",
+          "name": "百度网盘",
+          "slug": "baidu",
+          "icon_url": null
+        },
+        "download_url": "https://...",
+        "extract_code": "abcd",
+        "priority": 0,
+        "status": "active",
+        "notes": null,
+        "created_at": "2026-07-16T00:00:00Z",
+        "updated_at": "2026-07-16T00:00:00Z"
+      }
+    ],
+    "total": 10,
+    "page": 1,
+    "page_size": 20,
+    "total_pages": 1
+  }
+}
+```
+
+#### POST /api/v1/admin/downloads
+
+创建下载资源。
+
+**请求体**：
+
+```json
+{
+  "game_id": "uuid",
+  "provider_id": "uuid",
+  "download_url": "https://pan.baidu.com/s/xxxx",
+  "extract_code": "abcd",
+  "priority": 0,
+  "status": "active",
+  "notes": "含 DLC"
+}
+```
+
+- `game_id` 必须引用一个存在且未删除的游戏
+- `provider_id` 必须引用一个存在且未删除的下载渠道
+- `status` 可选值：`active`、`expired`、`disabled`，默认为 `active`
+- `priority` 越小越靠前，默认为 0
+- 返回 201 Created
+
+#### PUT /api/v1/admin/downloads/{id}
+
+更新下载资源。
+
+**路径参数**：`id` (UUID) - 下载资源 ID
+
+**请求体**：所有字段均为可选（只传需要更新的字段）。
+
+- 更新 `provider_id` 时验证渠道存在性
+- 更新 `status` 时验证值合法性
+- 返回完整更新后的下载资源详情
+
+#### DELETE /api/v1/admin/downloads/{id}
+
+软删除下载资源。
+
+**路径参数**：`id` (UUID) - 下载资源 ID
+
+- 设置 `deleted_at` 时间戳
+- 数据可恢复
+- 返回 200 + 成功消息
+
+### 管理接口 — 下载渠道
+
+#### GET /api/v1/admin/download-providers
+
+获取所有下载渠道列表。
+
+**无需参数**。
+
+**响应**：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": "uuid",
+      "name": "百度网盘",
+      "slug": "baidu",
+      "icon_url": null,
+      "website_url": "https://pan.baidu.com",
+      "sort_order": 0,
+      "is_active": true,
+      "created_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z"
+    }
+  ]
+}
+```
+
+#### POST /api/v1/admin/download-providers
+
+创建下载渠道。
+
+**请求体**：
+
+```json
+{
+  "name": "百度网盘",
+  "slug": "baidu",
+  "icon_url": "https://...",
+  "website_url": "https://pan.baidu.com",
+  "sort_order": 0,
+  "is_active": true
+}
+```
+
+- `slug` 可选，不提供时自动从名称生成
+- 渠道名称必须唯一
+- 返回 201 Created
+
+#### PUT /api/v1/admin/download-providers/{id}
+
+更新下载渠道。
+
+**路径参数**：`id` (UUID) - 渠道 ID
+
+**请求体**：所有字段均为可选（只传需要更新的字段）。
+
+- 自动检测名称唯一性
+- `slug` 传空字符串时自动重新生成
+- 返回完整更新后的渠道详情
+
+#### DELETE /api/v1/admin/download-providers/{id}
+
+软删除下载渠道。
+
+**路径参数**：`id` (UUID) - 渠道 ID
+
+- 设置 `deleted_at` 时间戳
+- 注意：有关联下载资源的渠道无法删除（RESTRICT 约束）
+- 返回 200 + 成功消息
+
+---
+
+*最后更新：2026-07-16 | v0.5.0*

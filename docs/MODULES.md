@@ -16,7 +16,7 @@
 | M005 | auth | planned | TBD | 0.1.0 | M004 | 4 | 0% | - | 否 |
 | M006 | search | planned | TBD | 0.2.0 | M001 | 9 | 0% | - | 否 |
 | M007 | upload | planned | TBD | 0.1.0 | M003 | 7 | 0% | - | 否 |
-| M008 | download | planned | TBD | 0.1.0 | M003, M005 | 8 | 0% | - | 否 |
+| M008 | download | completed | Codex | 0.5.0 | M000, M001 | 8 | 100% | pending | 否 |
 | M009 | seo | planned | TBD | 0.3.0 | M001, M002 | 12 | 0% | - | 否 |
 | M010 | comments | planned | TBD | 0.2.0 | M004, M001 | 10 | 0% | - | 否 |
 | M011 | ratings | planned | TBD | 0.2.0 | M004, M001 | 11 | 0% | - | 否 |
@@ -49,10 +49,12 @@ M015 (analytics) — 独立模块，无依赖
 | Phase 0.1 | v0.1.1 | - | 文档规范增强 ✓ |
 | Phase 0.2 | v0.2.0 | M000 | 数据库基础 ✓ |
 | Phase 1 | v0.3.0 | M001 | 游戏 API ✓ |
-| Phase 2 | v0.3.x | M002, M004, M005 | 核心基础模块 |
-| Phase 3 | v0.4.x | M003, M007, M008, M006, M010, M011, M014 | 核心功能 |
-| Phase 4 | v0.5.x | M012, M013, M009 | 社区功能 + SEO |
-| Phase 5 | v0.6.x | M015 | 数据分析 |
+| Phase 2 | v0.4.0 | M002 | Category + Tag API ✓ |
+| Phase 2.5 | v0.5.0 | M008 | Download API ✓ |
+| Phase 3 | v0.4.x | M004, M005 | 核心基础模块 |
+| Phase 4 | v0.5.x | M003, M007, M006, M010, M011, M014 | 核心功能 |
+| Phase 5 | v0.6.x | M012, M013, M009 | 社区功能 + SEO |
+| Phase 6 | v0.7.x | M015 | 数据分析 |
 
 ---
 
@@ -127,10 +129,23 @@ M015 (analytics) — 独立模块，无依赖
 - **状态**：planned
 - **依赖**：M003 (resources)
 
-### M008 — download（文件下载）
-- **描述**：带速率限制的文件下载和追踪
-- **状态**：planned
-- **依赖**：M003 (resources), M005 (auth)
+### M008 — download（下载资源管理）
+- **描述**：游戏下载资源管理，支持多下载渠道、优先级排序、提取码、启用/禁用状态
+- **状态**：completed
+- **版本**：0.5.0
+- **依赖**：M000 (database-foundation), M001 (games)
+- **后端目录**：`backend/models/download_provider.py`, `backend/models/download_resource.py`, `backend/repositories/download_provider_repository.py`, `backend/repositories/download_resource_repository.py`, `backend/services/download_provider_service.py`, `backend/services/download_resource_service.py`, `backend/api/v1/endpoints/download_providers.py`, `backend/api/v1/endpoints/download_resources.py`, `backend/schemas/download_provider.py`, `backend/schemas/download_resource.py`
+- **数据表**：`download_providers`, `download_resources`
+- **接口**：
+  - `GET /api/v1/games/{slug}/downloads` — 游戏下载资源（仅返回启用状态）
+  - `GET /api/v1/admin/downloads` — 下载资源列表（分页 + 按游戏筛选）
+  - `POST /api/v1/admin/downloads` — 创建下载资源
+  - `PUT /api/v1/admin/downloads/{id}` — 更新下载资源
+  - `DELETE /api/v1/admin/downloads/{id}` — 软删除下载资源
+  - `GET /api/v1/admin/download-providers` — 下载渠道列表
+  - `POST /api/v1/admin/download-providers` — 创建下载渠道
+  - `PUT /api/v1/admin/download-providers/{id}` — 更新下载渠道
+  - `DELETE /api/v1/admin/download-providers/{id}` — 软删除下载渠道
 
 ### M009 — seo（搜索引擎优化）
 - **描述**：Sitemap、Meta 标签、结构化数据、SSR 优化
@@ -209,4 +224,4 @@ M015 (analytics) — 独立模块，无依赖
 
 ---
 
-*最后更新：2026-07-15 | v0.3.0*
+*最后更新：2026-07-16 | v0.5.0*

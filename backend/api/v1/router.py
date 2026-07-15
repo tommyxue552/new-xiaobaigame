@@ -4,6 +4,9 @@ from fastapi import APIRouter
 
 from backend.api.v1.endpoints.categories import admin_router as categories_admin_router
 from backend.api.v1.endpoints.categories import public_router as categories_router
+from backend.api.v1.endpoints.download_providers import admin_router as download_providers_admin_router
+from backend.api.v1.endpoints.download_resources import admin_router as downloads_admin_router
+from backend.api.v1.endpoints.download_resources import public_router as downloads_router
 from backend.api.v1.endpoints.games import admin_router as games_admin_router
 from backend.api.v1.endpoints.games import public_router as games_router
 from backend.api.v1.endpoints.tags import admin_router as tags_admin_router
@@ -19,7 +22,7 @@ api_router = APIRouter()
 @api_router.get("/health", tags=["System"])
 async def health_check():
     """Kubernetes-style liveness probe."""
-    return {"status": "ok", "version": "0.4.0"}
+    return {"status": "ok", "version": "0.5.0"}
 
 
 # ---------------------------------------------------------------------------
@@ -32,3 +35,6 @@ api_router.include_router(categories_router)
 api_router.include_router(categories_admin_router)
 api_router.include_router(tags_router)
 api_router.include_router(tags_admin_router)
+api_router.include_router(downloads_router)
+api_router.include_router(downloads_admin_router)
+api_router.include_router(download_providers_admin_router)

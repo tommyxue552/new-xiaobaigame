@@ -5,6 +5,17 @@ from backend.schemas.category import (
     CategoryDetailResponse,
     CategoryTreeNode,
 )
+from backend.schemas.download_provider import (
+    DownloadProviderCreate,
+    DownloadProviderResponse,
+    DownloadProviderUpdate,
+)
+from backend.schemas.download_resource import (
+    DownloadProviderBrief,
+    DownloadResourceCreate,
+    DownloadResourceResponse,
+    DownloadResourceUpdate,
+)
 from backend.schemas.game import (
     GameCreate,
     GameUpdate,

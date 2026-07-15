@@ -1,4 +1,6 @@
 ﻿"""Repositories package."""
 from backend.repositories.category_repository import CategoryRepository
+from backend.repositories.download_provider_repository import DownloadProviderRepository
+from backend.repositories.download_resource_repository import DownloadResourceRepository
 from backend.repositories.game_repository import GameRepository
 from backend.repositories.tag_repository import TagRepository

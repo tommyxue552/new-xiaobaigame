@@ -8,12 +8,12 @@
 
 | 项目 | 详情 |
 |------|------|
-| **当前版本** | v0.4.0 |
-| **当前开发模块** | M002 (categories) + Tags — 已完成 |
-| **完成百分比** | 18.75%（3/16 模块已完成） |
+| **当前版本** | v0.5.0 |
+| **当前开发模块** | M008 (download) — 已完成 |
+| **完成百分比** | 25%（4/16 模块已完成） |
 | **当前负责人** | Codex |
 | **下一模块** | M004 (users) — 用户系统 |
-| **当前状态** | Category + Tag API 完成，准备进入下一模块 |
+| **当前状态** | Download API 完成，准备进入下一模块 |
 | **是否阻塞** | 否 |
 | **风险** | 无 |
 
@@ -23,23 +23,24 @@
 
 | 文件 | 变更类型 | 日期 |
 |------|---------|------|
-| backend/models/game.py | 修改（新增 category_id） | 2026-07-15 |
-| backend/models/category.py | 修改（新增 games 关系） | 2026-07-15 |
-| backend/schemas/game.py | 新增 | 2026-07-15 |
-| backend/repositories/game_repository.py | 新增 | 2026-07-15 |
-| backend/services/game_service.py | 新增 | 2026-07-15 |
-| backend/api/v1/endpoints/games.py | 新增 | 2026-07-15 |
-| backend/api/v1/router.py | 修改（引入 games 路由） | 2026-07-15 |
-| backend/schemas/__init__.py | 更新 | 2026-07-15 |
-| backend/repositories/__init__.py | 更新 | 2026-07-15 |
-| backend/services/__init__.py | 更新 | 2026-07-15 |
-| backend/api/v1/endpoints/__init__.py | 更新 | 2026-07-15 |
-| backend/alembic/versions/2026_07_15_0002-add_category_id_to_games.py | 新增 | 2026-07-15 |
-| backend/core/config.py | 修改（版本→0.3.0） | 2026-07-15 |
-| docs/API.md | 更新（新增 Game API 章节） | 2026-07-15 |
-| docs/MODULES.md | 更新（M001→completed） | 2026-07-15 |
-| docs/CHANGELOG.md | 更新（v0.3.0） | 2026-07-15 |
-| docs/PROJECT.md | 更新（版本→0.3.0） | 2026-07-15 |
+| backend/schemas/download_provider.py | 新增 | 2026-07-16 |
+| backend/schemas/download_resource.py | 新增 | 2026-07-16 |
+| backend/repositories/download_provider_repository.py | 新增 | 2026-07-16 |
+| backend/repositories/download_resource_repository.py | 新增 | 2026-07-16 |
+| backend/services/download_provider_service.py | 新增 | 2026-07-16 |
+| backend/services/download_resource_service.py | 新增 | 2026-07-16 |
+| backend/api/v1/endpoints/download_providers.py | 新增 | 2026-07-16 |
+| backend/api/v1/endpoints/download_resources.py | 新增 | 2026-07-16 |
+| backend/api/v1/router.py | 修改（引入 downloads 路由） | 2026-07-16 |
+| backend/core/config.py | 修改（版本→0.5.0） | 2026-07-16 |
+| backend/schemas/__init__.py | 更新 | 2026-07-16 |
+| backend/repositories/__init__.py | 更新 | 2026-07-16 |
+| backend/services/__init__.py | 更新 | 2026-07-16 |
+| backend/api/v1/endpoints/__init__.py | 更新 | 2026-07-16 |
+| docs/API.md | 更新（新增 Download API 章节） | 2026-07-16 |
+| docs/MODULES.md | 更新（M008→completed） | 2026-07-16 |
+| docs/CHANGELOG.md | 更新（v0.5.0） | 2026-07-16 |
+| docs/PROJECT.md | 更新（版本→0.5.0） | 2026-07-16 |
 
 ---
 
@@ -55,7 +56,7 @@
 | M005 | auth | planned | 0% | TBD |
 | M006 | search | planned | 0% | TBD |
 | M007 | upload | planned | 0% | TBD |
-| M008 | download | planned | 0% | TBD |
+| M008 | download | completed | 100% | Codex |
 | M009 | seo | planned | 0% | TBD |
 | M010 | comments | planned | 0% | TBD |
 | M011 | ratings | planned | 0% | TBD |
@@ -72,6 +73,8 @@
 |------|------|
 | M000 database-foundation | pending — 待 ChatGPT Code Review |
 | M001 games | pending — 待 ChatGPT Code Review |
+| M002 categories | pending — 待 ChatGPT Code Review |
+| M008 download | pending — 待 ChatGPT Code Review |
 
 ---
 
@@ -93,4 +96,4 @@
 
 ---
 
-*最后更新：2026-07-15 | v0.3.0*
+*最后更新：2026-07-16 | v0.5.0*

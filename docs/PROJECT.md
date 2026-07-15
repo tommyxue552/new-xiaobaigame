@@ -1,166 +1,166 @@
-﻿# PROJECT.md �� ��Ŀ����
+﻿# PROJECT.md — 项目总览
 
-## ��Ŀ��λ
+## 项目定位
 
-`web-xiaobaigame` ��һ��������Ϸ��ҺͿ����ߵ�**��Ϸ��Դ����ƽ̨**���û�������������������ظ�����Ϸ��Դ���浵��ģ�顢���ߡ����Եȣ���Ҳ�����ϴ��ͷ����Լ�����Դ��
+`web-xiaobaigame` 是一个面向游戏玩家和开发者的**游戏资源分享平台**。用户可以浏览、搜索和下载各种游戏资源（存档、模组、工具、脚本等），也可以上传和分享自己的资源。
 
-## ��ĿĿ��
+## 项目目标
 
-- **���ڣ�v0.1 ~ v0.3��**���������Ĺ��ܣ�������Ϸ��Ŀ�������Դ�ϴ����ء��û�ϵͳ
-- **���ڣ�v0.4 ~ v0.7��**�������������ܣ����ۡ����֡��ղء�֪ͨ
-- **���ڣ�v0.8 ~ v1.0��**��SEO �Ż������ʻ�����ҵ��׼��
+- **近期（v0.1 ~ v0.3）**：建立核心功能，包括游戏条目、资源上传下载、用户系统
+- **中期（v0.4 ~ v0.7）**：增强社区功能，评论、评分、收藏、通知
+- **远期（v0.8 ~ v1.0）**：SEO 优化、国际化、企业级标准
 
-## ���ڹ滮
+## 长期规划
 
-����Ŀ���Ϊ **5~10 ��**��Ӫ���ڣ���˼ܹ������ѭ��
+本项目设计为 **5~10 年**运营周期，因此架构设计遵循：
 
-- ģ�黯������ϡ����ھ�
-- ÿ��ģ��ɶ������������ԡ�����
-- �ĵ��ʹ���ͬ��ά��
-- ������ƾ��߼�¼�ڰ�
+- 模块化、高内聚、低耦合
+- 每个模块可独立开发、测试、部署
+- 文档和代码同步维护
+- 所有设计决策记录在案
 
-## ��ǰ�汾
+## 当前版本
 
-**v0.4.0** — Category + Tag API 完成
+**v0.5.0** — Download API 完成
 
-## ����ջ
+## 技术栈
 
-| �㼶 | ����ѡ�� | ԭ�� |
+| 层级 | 技术选型 | 原因 |
 |------|---------|------|
-| ǰ�˿�� | Next.js 14 (App Router) | SSR/SSG ֧�֡�SEO �Ѻá���̬���� |
-| ����ϵͳ | TypeScript | ���Ͱ�ȫ��������Ŀ�ر� |
-| CSS ��� | TailwindCSS + Shadcn UI | ԭ�ӻ� CSS������ɶ��� |
-| ״̬���� | Zustand + React Query | �����������״̬�Ϳͻ���״̬���� |
-| �����֤ | React Hook Form + Zod | ���ܺá����Ͱ�ȫ |
-| ��˿�� | FastAPI | �������첽���Զ� OpenAPI �ĵ� |
-| ORM | SQLAlchemy 2.x (async) | ����� Python ORM���첽֧�� |
-| ���ݿ� | PostgreSQL 16 | ���ܷḻ����չ��ǿ |
-| ���� | Redis 7 | �����ܡ�֧�ֶ������ݽṹ |
-| ����洢 | MinIO (S3) | S3 ���ݡ������й� |
-| ������ | Docker + Compose | ����һ���ԡ��򻯲��� |
-| CI/CD | GitHub Actions | ��ѡ��� GitHub ��ȼ��� |
+| 前端框架 | Next.js 14 (App Router) | SSR/SSG 支持、SEO 友好、生态丰富 |
+| 类型系统 | TypeScript | 类型安全、大型项目必备 |
+| CSS 框架 | TailwindCSS + Shadcn UI | 原子化 CSS、高度可定制 |
+| 状态管理 | Zustand + React Query | 轻量级、服务端状态和客户端状态分离 |
+| 表单验证 | React Hook Form + Zod | 性能好、类型安全 |
+| 后端框架 | FastAPI | 原生异步、自动 OpenAPI 文档 |
+| ORM | SQLAlchemy 2.x (async) | 最流行 Python ORM、异步支持 |
+| 数据库 | PostgreSQL 16 | 功能丰富、扩展性强 |
+| 缓存 | Redis 7 | 高性能、支持多种数据结构 |
+| 对象存储 | MinIO (S3) | S3 兼容、可自托管 |
+| 容器化 | Docker + Compose | 环境一致性、简化部署 |
+| CI/CD | GitHub Actions | 免费、与 GitHub 深度集成 |
 
-## �ܹ�˵��
+## 架构说明
 
-��� [ARCHITECTURE.md](ARCHITECTURE.md)��
+详见 [ARCHITECTURE.md](ARCHITECTURE.md)。
 
-**�ֲ�ܹ�**��
+**分层架构**：
 
 ```
 Frontend (Next.js)
-  �� HTTP/REST
+  ↕ HTTP/REST
 Backend (FastAPI)
-  ������ API Layer (routers, middleware)
-  ������ Service Layer (business logic)
-  ������ Repository Layer (data access)
-  ������ Infrastructure (DB, Redis, S3)
+  ├── API Layer (routers, middleware)
+  ├── Service Layer (business logic)
+  ├── Repository Layer (data access)
+  └── Infrastructure (DB, Redis, S3)
 ```
 
-## ģ��˵��
+## 模块说明
 
-��� [MODULES.md](MODULES.md)��
+详见 [MODULES.md](MODULES.md)。
 
-��Ŀ���滮 **15 ��ģ��**����������ϵ�ֽ׶ο�����
+项目共规划 **15 个模块**，按依赖关系分阶段开发：
 
-| �׶� | �汾 | ģ�� |
+| 阶段 | 版本 | 模块 |
 |------|------|------|
-| Phase 0 | v0.1.0 | ��Ŀ��ʼ��������ɣ� |
-| Phase 0.1 | v0.3.0 | �ĵ��淶��ǿ����ǰ�� |
-| Phase 1 | v0.1.2+ | games, categories, users, auth |
-| Phase 2 | v0.2.x | resources, upload, download |
-| Phase 3 | v0.3.x | search, comments, ratings |
-| Phase 4 | v0.4.x | collections, notifications, admin, analytics |
+| Phase 0 | v0.1.0 | 项目初始化（已完成） |
+| Phase 0.1 | v0.1.1 | 文档规范增强（已完成） |
+| Phase 1 | v0.2.0+ | database-foundation, games, categories, users, auth |
+| Phase 2 | v0.5.0 | download |
+| Phase 3 | v0.6.x | search, comments, ratings |
+| Phase 4 | v0.7.x | collections, notifications, admin, analytics |
 
 ---
 
 ## Documentation Driven Development
 
-����Ŀ���� **Documentation Driven Development (DDD)** ����ģʽ��
+本项目采用 **Documentation Driven Development (DDD)** 开发模式。
 
-### ����ԭ��
-- �ĵ�����Ŀ��Ψһ������Դ��Single Source of Truth��
-- ���п����������Ķ��ĵ������ø��ݼ��俪��
-- �ĵ������ͬ����Ҫ��ͬ��ά��
-- �³�Աͨ���ĵ����ɻָ�ȫ����Ŀ������
-- ÿ�ζԻ���ʼ������ĵ��лָ�������
+### 核心原则
+- 文档是项目的唯一真相来源（Single Source of Truth）
+- 所有开发必须先阅读文档，不得根据记忆开发
+- 文档与代码同等重要，同步维护
+- 新成员通过文档即可恢复全部项目上下文
+- 每次对话的开始，从文档中恢复上下文
 
-### �ĵ���ϵ
+### 文档体系
 
-| �㼶 | �ĵ� | ���� |
+| 层级 | 文档 | 作用 |
 |------|------|------|
-| P0 | AGENTS.md, README.md | ��ں��ܸ� |
-| P1 | PROJECT.md, MODULES.md, ARCHITECTURE.md, DEVELOPMENT_STATUS.md | ��ĿԪ��Ϣ |
-| P2 | API.md, DATABASE.md, CODING_RULES.md �� | ����淶 |
-| P3 | AI_MEMORY.md, DECISIONS.md, CHANGELOG.md | ���ڼ���ͼ�¼ |
+| P0 | AGENTS.md, README.md | 入口和总纲 |
+| P1 | PROJECT.md, MODULES.md, ARCHITECTURE.md, DEVELOPMENT_STATUS.md | 项目元信息 |
+| P2 | API.md, DATABASE.md, CODING_RULES.md 等 | 领域规范 |
+| P3 | AI_MEMORY.md, DECISIONS.md, CHANGELOG.md | 长期记忆和记录 |
 
 ---
 
-## ������Ӫԭ��
+## 长期运营原则
 
-����Ŀ���Ŀ��Ϊ **5~10 ��**�ĳ�����Ӫ���ڣ���ˣ�
+本项目设计目标为 **5~10 年**的长期运营周期，因此：
 
-- ���������Ϳ�ά���������ڿ����ٶ�
-- �ܹ���Ʊ��뿼��δ����չ
-- �ĵ����뱣�������ͬ��
-- ÿ�����߱����� DECISIONS.md �м�¼ԭ��
-- ����ծ������� TODO.md ��׷��
-- ����һ���� hack������"���������ع�"
-- ����ģ��Ԥ����չ����
-- ���ݿ�ʹ����ɾ������������������ʷ
-
----
-
-## AI ����ԭ��
-
-### ��������
-- �ȶ��ĵ�����д����
-- ��ɨ��������Ŀ�������ȡ
-- ����ģ���޸�
-- ���޸������ģ��
-- ���޸���ʷ Migration
-- ���ֳ�ͻ������ݴ���
-- ÿ�ο�����ѭ 7 ���̶�����
-
-### ����Ҫ��
-- ���й�����������������ע��
-- �������ݿ�������ͨ�� Migration
-- ���� API �˵����ͨ�� Pydantic ��֤
-- ���Ը�����Ŀ�� �� 80%
-- �����ύǰ����ͨ�� lint ���
+- 代码质量和可维护性优先于开发速度
+- 架构设计必须考虑未来扩展
+- 文档必须保持与代码同步
+- 每个决策必须在 DECISIONS.md 中记录原因
+- 技术债务必须在 TODO.md 中追踪
+- 不做一次性 hack，不做"先上线再重构"
+- 所有模块预留扩展能力
+- 数据库使用软删除，保留完整历史
 
 ---
 
-## �汾����
+## AI 开发原则
 
-��ѭ [Semantic Versioning](https://semver.org/)��
+### 开发纪律
+- 先读文档，再写代码
+- 不扫描整个项目，精准读取
+- 不跨模块修改
+- 不修改已完成模块
+- 不修改历史 Migration
+- 冲突时优先保证可维护性
+- 每次开发遵循 7 步固定流程
 
-- **MAJOR (X.0.0)**�������ݵ� API ������ش�ܹ��ع�
-- **MINOR (0.X.0)**�������ݵĹ�����������ģ�����
-- **PATCH (0.0.X)**�������ݵ������޸����ĵ�����
-
-�汾�ż�¼λ�ã�
-- `backend/core/config.py` �� `VERSION`
-- `frontend/package.json` �� `version`
-- `README.md` �� �汾˵��
-- `docs/CHANGELOG.md` �� �����¼
+### 质量要求
+- 所有公共接口必须有 OpenAPI 注释
+- 所有数据库变更必须通过 Migration
+- 所有 API 端点必须通过 Pydantic 验证
+- 测试覆盖率目标 ≥ 80%
+- 代码提交前必须通过 lint 检查
 
 ---
 
-## ��Ŀ��������
+## 版本策略
+
+遵循 [Semantic Versioning](https://semver.org/)。
+
+- **MAJOR (X.0.0)**：不兼容的 API 变更或重大架构重构
+- **MINOR (0.X.0)**：向后兼容的功能新增或新模块完成
+- **PATCH (0.0.X)**：向后兼容的问题修复或文档更新
+
+版本号记录位置：
+- `backend/core/config.py` → `VERSION`
+- `frontend/package.json` → `version`
+- `README.md` → 版本说明
+- `docs/CHANGELOG.md` → 变更记录
+
+---
+
+## 项目生命周期
 
 ```
-Phase 0 (v0.1.x)    ��Ŀ��ʼ�� + �ĵ���ϵ + ������ʩ
-Phase 1 (v0.1.x)    ���Ļ���ģ�� (users, auth, categories, games)
-Phase 2 (v0.3.x)    ���Ĺ��� (resources, upload, download, search)
-Phase 3 (v0.4.x)    �������� (comments, ratings, collections, notifications)
-Phase 4 (v0.5.x)    ��ǿ���� (analytics, admin, SEO)
-Phase 5 (v0.6~0.7)  �����Ż� + ��ȫ�ӹ� + �����
-Phase 6 (v0.8~0.9)  ��ҵ��׼�� + �ȶ���
-Phase 7 (v1.0.0)    ��ʽ����
+Phase 0 (v0.1.x)    项目初始化 + 文档体系 + 基础设施
+Phase 1 (v0.1.x)    核心基础模块 (users, auth, categories, games)
+Phase 2 (v0.3.x)    核心功能 (resources, upload, download, search)
+Phase 3 (v0.4.x)    社区功能 (comments, ratings, collections, notifications)
+Phase 4 (v0.5.x)    增强功能 (analytics, admin, SEO)
+Phase 5 (v0.6~0.7)  性能优化 + 安全加固 + 国际化
+Phase 6 (v0.8~0.9)  企业级标准 + 稳定性
+Phase 7 (v1.0.0)    正式发布
 ```
 
-ÿ���׶���ɺ������һ�׶Σ�������ǰ���������׶�ģ�顣
+每个阶段完成后才进入下一阶段，不提前开发后续阶段模块。
 
 ---
 
-*�����£�2026-07-15 | v0.3.0*
+*最后更新：2026-07-16 | v0.5.0*

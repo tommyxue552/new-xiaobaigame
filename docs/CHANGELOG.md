@@ -3,6 +3,39 @@
 本文件遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 格式。
 
 
+## [0.5.0] — 2026-07-16
+
+### Added
+- M008 Download API: 下载资源管理完整后端 API
+  - 公开接口：`GET /api/v1/games/{slug}/downloads` — 游戏下载资源列表（仅返回启用状态数据，含游戏名称、渠道名称、下载地址、提取码、排序）
+  - 下载资源管理：`GET/POST/PUT/DELETE /api/v1/admin/downloads` — CRUD（分页 + 按游戏筛选）
+  - 下载渠道管理：`GET/POST/PUT/DELETE /api/v1/admin/download-providers` — CRUD
+- `backend/schemas/download_provider.py` — DownloadProviderResponse, DownloadProviderCreate, DownloadProviderUpdate
+- `backend/schemas/download_resource.py` — DownloadProviderBrief, DownloadResourceResponse, DownloadResourceCreate, DownloadResourceUpdate
+- `backend/repositories/download_provider_repository.py` — DownloadProviderRepository（CRUD、Slug/名称唯一性、列表、软删除）
+- `backend/repositories/download_resource_repository.py` — DownloadResourceRepository（CRUD、按游戏查询、分页、仅启用过滤、存在性校验）
+- `backend/services/download_provider_service.py` — DownloadProviderService（Slug 生成、名称唯一性、部分更新）
+- `backend/services/download_resource_service.py` — DownloadResourceService（游戏/渠道存在性校验、状态验证）
+- `backend/api/v1/endpoints/download_providers.py` — 管理路由（CRUD）
+- `backend/api/v1/endpoints/download_resources.py` — 公开路由 + 管理路由
+- `docs/API.md` — 新增 Download API 章节
+
+### Changed
+- `backend/core/config.py` VERSION 更新为 0.5.0
+- `backend/api/v1/router.py` 引入 download_providers 和 download_resources 路由
+- `backend/schemas/__init__.py` 导出 download_provider 和 download_resource schemas
+- `backend/repositories/__init__.py` 导出 DownloadProviderRepository 和 DownloadResourceRepository
+- `backend/services/__init__.py` 导出 DownloadProviderService 和 DownloadResourceService
+- `backend/api/v1/endpoints/__init__.py` 导入 download_providers 和 download_resources
+- `docs/MODULES.md` M008 状态更新为 completed，新增详细模块说明
+- `docs/PROJECT.md` 版本更新、模块进度更新
+- `docs/DEVELOPMENT_STATUS.md` 进度更新
+
+### Security
+- 管理接口暂无权限守卫（v0.5.0），后续 M005 auth 模块将添加
+
+---
+
 ## [0.4.0] — 2026-07-15
 
 ### Added
@@ -42,6 +75,8 @@
 
 ### Security
 - 管理接口暂无权限守卫（v0.4.0），后续 M005 auth 模块将添加
+
+---
 
 ## [0.3.0] — 2026-07-15
 
@@ -167,4 +202,4 @@
 
 ---
 
-*最后更新：2026-07-15 | v0.3.0*
+*最后更新：2026-07-16 | v0.5.0*
