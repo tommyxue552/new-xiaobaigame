@@ -1,0 +1,15 @@
+﻿# CODEOWNERS - Defines who is responsible for code in each part of the repository.
+
+# Core infrastructure
+/backend/core/         @code-owner
+/backend/api/          @code-owner
+/docker/               @code-owner
+/.github/              @code-owner
+
+# Documentation
+/docs/                 @code-owner
+*.md                   @code-owner
+
+# Frontend and Backend feature code (will be assigned per module)
+/frontend/src/features/   @code-owner
+/backend/services/        @code-owner

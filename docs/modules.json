@@ -1,0 +1,17 @@
+﻿[
+  {"name": "games", "status": "planned", "owner": "TBD", "version": "0.1.0", "depends_on": [], "order": 1, "description": "Game entry CRUD, browsing, search"},
+  {"name": "categories", "status": "planned", "owner": "TBD", "version": "0.1.0", "depends_on": [], "order": 2, "description": "Category taxonomy and navigation"},
+  {"name": "resources", "status": "planned", "owner": "TBD", "version": "0.1.0", "depends_on": ["games"], "order": 3, "description": "Uploadable/downloadable resource files linked to games"},
+  {"name": "users", "status": "planned", "owner": "TBD", "version": "0.1.0", "depends_on": [], "order": 4, "description": "User registration, profile, roles, permissions"},
+  {"name": "auth", "status": "planned", "owner": "TBD", "version": "0.1.0", "depends_on": ["users"], "order": 5, "description": "JWT authentication, login, register, token refresh"},
+  {"name": "search", "status": "planned", "owner": "TBD", "version": "0.2.0", "depends_on": ["games"], "order": 6, "description": "Full-text search with Elasticsearch / pg_trgm"},
+  {"name": "upload", "status": "planned", "owner": "TBD", "version": "0.1.0", "depends_on": ["resources"], "order": 7, "description": "File upload to MinIO with validation and virus scanning"},
+  {"name": "download", "status": "planned", "owner": "TBD", "version": "0.1.0", "depends_on": ["resources", "auth"], "order": 8, "description": "Rate-limited file download with tracking"},
+  {"name": "seo", "status": "planned", "owner": "TBD", "version": "0.3.0", "depends_on": ["games", "categories"], "order": 9, "description": "Sitemap, meta tags, structured data, SSR optimization"},
+  {"name": "comments", "status": "planned", "owner": "TBD", "version": "0.2.0", "depends_on": ["users", "games"], "order": 10, "description": "Nested comment system with moderation"},
+  {"name": "ratings", "status": "planned", "owner": "TBD", "version": "0.2.0", "depends_on": ["users", "games"], "order": 11, "description": "Star rating and review system for games"},
+  {"name": "collections", "status": "planned", "owner": "TBD", "version": "0.3.0", "depends_on": ["users", "games"], "order": 12, "description": "User-curated game collections / playlists"},
+  {"name": "notifications", "status": "planned", "owner": "TBD", "version": "0.3.0", "depends_on": ["users"], "order": 13, "description": "Push and email notification system"},
+  {"name": "admin", "status": "planned", "owner": "TBD", "version": "0.2.0", "depends_on": ["auth"], "order": 14, "description": "Admin dashboard for moderation and management"},
+  {"name": "analytics", "status": "planned", "owner": "TBD", "version": "0.4.0", "depends_on": [], "order": 15, "description": "Download stats, user analytics, traffic monitoring"}
+]
