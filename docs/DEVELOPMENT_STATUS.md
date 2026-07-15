@@ -1,4 +1,4 @@
-# DEVELOPMENT_STATUS.md — 开发状态追踪
+﻿# DEVELOPMENT_STATUS.md — 开发状态追踪
 
 > 本文档记录项目当前开发状态，每次完成模块后自动更新。
 
@@ -8,12 +8,12 @@
 
 | 项目 | 详情 |
 |------|------|
-| **当前版本** | v0.2.0 |
-| **当前开发模块** | M000 (database-foundation) — 已完成 |
-| **完成百分比** | 6.25%（1/16 模块已完成） |
+| **当前版本** | v0.3.0 |
+| **当前开发模块** | M001 (games) — 已完成 |
+| **完成百分比** | 12.5%（2/16 模块已完成） |
 | **当前负责人** | Codex |
-| **下一模块** | M001 (games) — 游戏条目管理 |
-| **当前状态** | 🟢 数据库基础完成，准备进入 Phase 1 |
+| **下一模块** | M002 (categories) — 分类系统 |
+| **当前状态** | Game API 完成，准备进入下一模块 |
 | **是否阻塞** | 否 |
 | **风险** | 无 |
 
@@ -23,25 +23,23 @@
 
 | 文件 | 变更类型 | 日期 |
 |------|---------|------|
-| backend/models/base.py | 新增 | 2026-07-15 |
-| backend/models/game.py | 新增 | 2026-07-15 |
-| backend/models/category.py | 新增 | 2026-07-15 |
-| backend/models/tag.py | 新增 | 2026-07-15 |
-| backend/models/game_tag.py | 新增 | 2026-07-15 |
-| backend/models/screenshot.py | 新增 | 2026-07-15 |
-| backend/models/download_provider.py | 新增 | 2026-07-15 |
-| backend/models/download_resource.py | 新增 | 2026-07-15 |
-| backend/models/admin.py | 新增 | 2026-07-15 |
-| backend/models/setting.py | 新增 | 2026-07-15 |
-| backend/models/__init__.py | 更新 | 2026-07-15 |
-| backend/alembic/versions/2026_07_15_0001-add_core_tables.py | 新增 | 2026-07-15 |
-| backend/alembic/env.py | 更新 | 2026-07-15 |
-| backend/core/config.py | 更新 | 2026-07-15 |
-| docs/DATABASE.md | 重写 | 2026-07-15 |
-| docs/MODULES.md | 更新 | 2026-07-15 |
-| docs/CHANGELOG.md | 更新 | 2026-07-15 |
-| docs/PROJECT.md | 更新 | 2026-07-15 |
-| docs/DECISIONS.md | 更新 | 2026-07-15 |
+| backend/models/game.py | 修改（新增 category_id） | 2026-07-15 |
+| backend/models/category.py | 修改（新增 games 关系） | 2026-07-15 |
+| backend/schemas/game.py | 新增 | 2026-07-15 |
+| backend/repositories/game_repository.py | 新增 | 2026-07-15 |
+| backend/services/game_service.py | 新增 | 2026-07-15 |
+| backend/api/v1/endpoints/games.py | 新增 | 2026-07-15 |
+| backend/api/v1/router.py | 修改（引入 games 路由） | 2026-07-15 |
+| backend/schemas/__init__.py | 更新 | 2026-07-15 |
+| backend/repositories/__init__.py | 更新 | 2026-07-15 |
+| backend/services/__init__.py | 更新 | 2026-07-15 |
+| backend/api/v1/endpoints/__init__.py | 更新 | 2026-07-15 |
+| backend/alembic/versions/2026_07_15_0002-add_category_id_to_games.py | 新增 | 2026-07-15 |
+| backend/core/config.py | 修改（版本→0.3.0） | 2026-07-15 |
+| docs/API.md | 更新（新增 Game API 章节） | 2026-07-15 |
+| docs/MODULES.md | 更新（M001→completed） | 2026-07-15 |
+| docs/CHANGELOG.md | 更新（v0.3.0） | 2026-07-15 |
+| docs/PROJECT.md | 更新（版本→0.3.0） | 2026-07-15 |
 
 ---
 
@@ -50,7 +48,7 @@
 | 编号 | 模块 | 状态 | 进度 | 负责人 |
 |------|------|------|------|--------|
 | M000 | database-foundation | completed | 100% | Codex |
-| M001 | games | planned | 0% | TBD |
+| M001 | games | completed | 100% | Codex |
 | M002 | categories | planned | 0% | TBD |
 | M003 | resources | planned | 0% | TBD |
 | M004 | users | planned | 0% | TBD |
@@ -73,6 +71,7 @@
 | 项目 | 状态 |
 |------|------|
 | M000 database-foundation | pending — 待 ChatGPT Code Review |
+| M001 games | pending — 待 ChatGPT Code Review |
 
 ---
 
@@ -94,4 +93,4 @@
 
 ---
 
-*最后更新：2026-07-15 | v0.2.0*
+*最后更新：2026-07-15 | v0.3.0*

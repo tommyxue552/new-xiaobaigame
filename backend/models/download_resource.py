@@ -1,4 +1,6 @@
-"""Download resource model linking games to download providers."""
+﻿"""Download resource model linking games to download providers."""
+
+import uuid
 
 from sqlalchemy import ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
@@ -24,7 +26,7 @@ class DownloadResource(BaseModel):
     extract_code: Mapped[str | None] = mapped_column(String(50), nullable=True, comment="提取码")
     priority: Mapped[int] = mapped_column(Integer, default=0, server_default="0", nullable=False, comment="优先级")
     status: Mapped[str] = mapped_column(
-        String(20), default="active", server_default="'active'", nullable=False,
+        String(20), default="active", server_default="''active''", nullable=False,
         comment="状态: active / expired / disabled"
     )
     notes: Mapped[str | None] = mapped_column(Text, nullable=True, comment="备注")

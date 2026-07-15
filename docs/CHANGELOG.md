@@ -1,7 +1,37 @@
-# CHANGELOG.md — 变更日志
+﻿# CHANGELOG.md — 变更日志
 
 本文件遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 格式。
 
+## [0.3.0] — 2026-07-15
+
+### Added
+- M001 Game API: 游戏模块完整后端 API
+  - `GET /api/v1/games` — 游戏列表，支持分页、分类/标签筛选、关键词搜索、多字段排序
+  - `GET /api/v1/games/{slug}` — 游戏详情（含分类、标签、截图、可用下载资源）
+  - `POST /api/v1/admin/games` — 创建游戏（Slug 自动生成/支持中文标题）
+  - `PUT /api/v1/admin/games/{id}` — 更新游戏（部分更新语义）
+  - `DELETE /api/v1/admin/games/{id}` — 软删除游戏
+- `backend/models/game.py` — Game 模型新增 `category_id` FK 字段
+- `backend/models/category.py` — Category 模型新增 `games` 反向关系
+- `backend/schemas/game.py` — GameCreate, GameUpdate, GameDetailResponse, GameListItem, GameListParams
+- `backend/repositories/game_repository.py` — GameRepository（async CRUD + 分页 + 筛选 + 搜索）
+- `backend/services/game_service.py` — GameService（Slug 生成、业务逻辑）
+- `backend/api/v1/endpoints/games.py` — 公开路由 + 管理路由
+- `backend/alembic/versions/2026_07_15_0002-add_category_id_to_games.py` — 数据库迁移
+- `docs/API.md` — 新增 Game API 章节
+- `docs/MODULES.md` — M001 状态更新为 completed
+
+### Changed
+- `backend/core/config.py` VERSION 更新为 0.3.0
+- `backend/api/v1/router.py` 重构为包含 games 路由
+- `backend/schemas/__init__.py` 导出 game schemas
+- `backend/repositories/__init__.py` 导出 GameRepository
+- `backend/services/__init__.py` 导出 GameService
+
+### Security
+- 管理接口暂无权限守卫（v0.3.0），后续 M005 auth 模块将添加
+
+---
 
 ## [0.2.0] — 2026-07-15
 
@@ -60,6 +90,7 @@
 - 无
 
 ---
+
 ## [0.1.0] — 2026-07-15
 
 ### Added
@@ -95,4 +126,4 @@
 
 ---
 
-*最后更新：2026-07-15 | v0.2.0*
+*最后更新：2026-07-15 | v0.3.0*

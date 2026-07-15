@@ -1,4 +1,6 @@
-"""Category model with hierarchical parent support."""
+﻿"""Category model with hierarchical parent support."""
+
+import uuid
 
 from sqlalchemy import ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
@@ -27,6 +29,10 @@ class Category(BaseModel):
     )
     children: Mapped[list["Category"]] = relationship(
         "Category", back_populates="parent", lazy="selectin", order_by="Category.sort_order"
+    )
+    # Games in this category
+    games: Mapped[list["Game"]] = relationship(
+        "Game", back_populates="category", lazy="selectin"
     )
 
     def __repr__(self) -> str:

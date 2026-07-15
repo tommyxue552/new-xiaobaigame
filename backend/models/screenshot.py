@@ -1,4 +1,6 @@
-"""Screenshot model for game preview images."""
+﻿"""Screenshot model for game preview images."""
+
+import uuid
 
 from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID

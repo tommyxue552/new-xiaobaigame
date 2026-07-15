@@ -127,4 +127,162 @@ GET /api/v1/games?page=1&page_size=20&sort_by=created_at&sort_order=desc&categor
 
 ---
 
-*最后更新：2026-07-15 | v0.1.0*
+## Game API (v0.3.0)
+
+### 公开接口
+
+#### GET /api/v1/games
+
+游戏列表，支持分页、分类/标签筛选、关键词搜索、排序。
+
+**查询参数**：
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| page | int | 1 | 页码 (>=1) |
+| page_size | int | 20 | 每页数量 (1-100) |
+| category | string | - | 按分类 slug 筛选 |
+| tag | string | - | 按标签 slug 筛选 |
+| keyword | string | - | 关键词搜索（标题/摘要） |
+| sort_by | string | published_at | 排序字段: created_at, published_at, view_count, download_count, title |
+| sort_order | string | desc | 排序方向: asc, desc |
+| status | string | - | 状态筛选: draft, published, hidden |
+
+**响应**：
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "items": [
+      {
+        "id": "uuid",
+        "title": "游戏标题",
+        "title_en": "Game Title",
+        "slug": "game-slug",
+        "summary": "简介",
+        "cover": "https://...",
+        "category": { "id": "uuid", "name": "分类", "slug": "category-slug" },
+        "published_at": "2026-07-15T00:00:00Z",
+        "view_count": 1000,
+        "download_count": 500,
+        "status": "published",
+        "tags": [
+          { "id": "uuid", "name": "标签", "slug": "tag-slug" }
+        ]
+      }
+    ],
+    "total": 100,
+    "page": 1,
+    "page_size": 20,
+    "total_pages": 5
+  }
+}
+```
+
+#### GET /api/v1/games/{slug}
+
+游戏详情，包含分类、标签、截图、可用下载资源。
+
+**路径参数**：
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| slug | string | 游戏 URL 标识 |
+
+**响应**：
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": "uuid",
+    "title": "游戏标题",
+    "slug": "game-slug",
+    "summary": "简介",
+    "content": "详细内容（Markdown/HTML）",
+    "cover": "https://...",
+    "category": { "id": "uuid", "name": "分类", "slug": "category-slug" },
+    "published_at": "2026-07-15T00:00:00Z",
+    "view_count": 1000,
+    "download_count": 500,
+    "status": "published",
+    "seo_title": "SEO 标题",
+    "seo_keywords": "keyword1,keyword2",
+    "seo_description": "SEO 描述",
+    "tags": [...],
+    "screenshots": [
+      { "id": "uuid", "image_url": "https://...", "title": "截图", "sort_order": 0 }
+    ],
+    "download_resources": [
+      {
+        "id": "uuid",
+        "provider": { "id": "uuid", "name": "百度网盘", "slug": "baidu", "icon_url": null },
+        "download_url": "https://...",
+        "extract_code": "abcd",
+        "priority": 0,
+        "status": "active",
+        "notes": null
+      }
+    ],
+    "created_at": "2026-07-15T00:00:00Z",
+    "updated_at": "2026-07-15T00:00:00Z"
+  }
+}
+```
+
+### 管理接口
+
+> 注意：v0.3.0 版本暂无权限守卫，后续版本将添加认证。
+
+#### POST /api/v1/admin/games
+
+创建游戏。
+
+**请求体**：
+```json
+{
+  "title": "游戏标题",
+  "title_en": "Game Title",
+  "slug": "custom-slug",
+  "summary": "简介",
+  "content": "详细内容",
+  "cover": "https://...",
+  "category_id": "uuid",
+  "published_at": "2026-07-15T00:00:00Z",
+  "status": "draft",
+  "seo_title": "SEO 标题",
+  "seo_keywords": "keyword1,keyword2",
+  "seo_description": "SEO 描述",
+  "tag_ids": ["uuid1", "uuid2"]
+}
+```
+
+- `slug` 可选，不提供时自动从标题生成（中文转拼音）
+- `status` 默认 `draft`
+- 返回 201 Created + 完整游戏详情
+
+#### PUT /api/v1/admin/games/{id}
+
+更新游戏。
+
+**路径参数**：`id` (UUID) - 游戏 ID
+
+**请求体**：同 POST，但所有字段均为可选（只传需要更新的字段）。
+
+- `tag_ids` 传 `[]` 清空所有标签，传 `null`（或不传）不修改标签
+- 返回完整更新后的游戏详情
+
+#### DELETE /api/v1/admin/games/{id}
+
+软删除游戏。
+
+**路径参数**：`id` (UUID) - 游戏 ID
+
+- 设置 `deleted_at` 时间戳
+- 数据可恢复，不会物理删除
+- 返回 200 + 成功消息
+
+---
+
+*最后更新：2026-07-15 | v0.3.0*
