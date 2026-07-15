@@ -2,6 +2,47 @@
 
 本文件遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 格式。
 
+
+## [0.4.0] — 2026-07-15
+
+### Added
+- M002 Category API: 分类系统完整后端 API
+  - `GET /api/v1/categories` — 分类树（无限级嵌套，含 game_count）
+  - `GET /api/v1/categories/{slug}` — 分类详情（含 game_count）
+  - `POST /api/v1/admin/categories` — 创建分类（自动 Slug 生成、名称唯一性校验）
+  - `PUT /api/v1/admin/categories/{id}` — 更新分类（部分更新语义、禁止自引用）
+  - `DELETE /api/v1/admin/categories/{id}` — 软删除（子分类自动置顶）
+- Tag API: 标签系统完整后端 API
+  - `GET /api/v1/tags` — 标签列表（分页 + 关键词搜索 + game_count）
+  - `GET /api/v1/tags/{slug}` — 标签详情（含 game_count）
+  - `POST /api/v1/admin/tags` — 创建标签（自动 Slug 生成、名称唯一性校验）
+  - `PUT /api/v1/admin/tags/{id}` — 更新标签（部分更新语义）
+  - `DELETE /api/v1/admin/tags/{id}` — 软删除（关联 game_tags 级联删除）
+- `backend/schemas/category.py` — CategoryTreeNode, CategoryDetailResponse, CategoryCreate, CategoryUpdate
+- `backend/schemas/tag.py` — TagResponse, TagCreate, TagUpdate
+- `backend/repositories/category_repository.py` — CategoryRepository（树查询、Slug/名称唯一性检查、game_count 统计）
+- `backend/repositories/tag_repository.py` — TagRepository（分页、搜索、game_count 统计）
+- `backend/services/category_service.py` — CategoryService（树构建、Slug 自动生成、名称唯一性、循环引用防护）
+- `backend/services/tag_service.py` — TagService（Slug 自动生成、名称唯一性）
+- `backend/api/v1/endpoints/categories.py` — 公开路由 + 管理路由
+- `backend/api/v1/endpoints/tags.py` — 公开路由 + 管理路由
+- `backend/utils/slug.py` — 共享 Slug 生成工具（pinyin_slug）
+- `docs/API.md` — 新增 Category API 和 Tag API 章节
+
+### Changed
+- `backend/core/config.py` VERSION 更新为 0.4.0
+- `backend/api/v1/router.py` 引入 categories 和 tags 路由
+- `backend/schemas/__init__.py` 导出 category 和 tag schemas
+- `backend/repositories/__init__.py` 导出 CategoryRepository 和 TagRepository
+- `backend/services/__init__.py` 导出 CategoryService 和 TagService
+- `backend/api/v1/endpoints/__init__.py` 导入 categories 和 tags
+- `docs/MODULES.md` M002 状态更新为 completed
+- `docs/PROJECT.md` 版本更新
+- `docs/DEVELOPMENT_STATUS.md` 进度更新
+
+### Security
+- 管理接口暂无权限守卫（v0.4.0），后续 M005 auth 模块将添加
+
 ## [0.3.0] — 2026-07-15
 
 ### Added

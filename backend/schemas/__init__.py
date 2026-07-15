@@ -1,4 +1,10 @@
 ﻿"""Schemas package."""
+from backend.schemas.category import (
+    CategoryCreate,
+    CategoryUpdate,
+    CategoryDetailResponse,
+    CategoryTreeNode,
+)
 from backend.schemas.game import (
     GameCreate,
     GameUpdate,
@@ -10,3 +16,8 @@ from backend.schemas.game import (
     SortOrder,
 )
 from backend.schemas.response import APIResponse, PaginatedData
+from backend.schemas.tag import (
+    TagCreate,
+    TagUpdate,
+    TagResponse,
+)

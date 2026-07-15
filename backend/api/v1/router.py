@@ -2,8 +2,12 @@
 
 from fastapi import APIRouter
 
+from backend.api.v1.endpoints.categories import admin_router as categories_admin_router
+from backend.api.v1.endpoints.categories import public_router as categories_router
 from backend.api.v1.endpoints.games import admin_router as games_admin_router
 from backend.api.v1.endpoints.games import public_router as games_router
+from backend.api.v1.endpoints.tags import admin_router as tags_admin_router
+from backend.api.v1.endpoints.tags import public_router as tags_router
 from backend.schemas.errors import ERROR_MESSAGES
 
 api_router = APIRouter()
@@ -15,7 +19,7 @@ api_router = APIRouter()
 @api_router.get("/health", tags=["System"])
 async def health_check():
     """Kubernetes-style liveness probe."""
-    return {"status": "ok", "version": "0.3.0"}
+    return {"status": "ok", "version": "0.4.0"}
 
 
 # ---------------------------------------------------------------------------
@@ -24,3 +28,7 @@ async def health_check():
 
 api_router.include_router(games_router)
 api_router.include_router(games_admin_router)
+api_router.include_router(categories_router)
+api_router.include_router(categories_admin_router)
+api_router.include_router(tags_router)
+api_router.include_router(tags_admin_router)

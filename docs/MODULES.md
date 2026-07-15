@@ -10,7 +10,7 @@
 |------|---------|------|--------|------|------|---------|------|--------|------|
 | M000 | database-foundation | completed | Codex | 0.2.0 | - | 0 | 100% | pending | 否 |
 | M001 | games | completed | Codex | 0.3.0 | M000 | 1 | 100% | pending | 否 |
-| M002 | categories | planned | TBD | 0.1.0 | M000 | 2 | 0% | - | 否 |
+| M002 | categories | completed | Codex | 0.4.0 | M000 | 2 | 100% | pending | 否 |
 | M003 | resources | planned | TBD | 0.1.0 | M001 | 6 | 0% | - | 否 |
 | M004 | users | planned | TBD | 0.1.0 | M000 | 3 | 0% | - | 否 |
 | M005 | auth | planned | TBD | 0.1.0 | M004 | 4 | 0% | - | 否 |
@@ -79,12 +79,25 @@ M015 (analytics) — 独立模块，无依赖
   - `PUT /api/v1/admin/games/{id}` — 更新游戏
   - `DELETE /api/v1/admin/games/{id}` — 软删除
 
-### M002 — categories（分类系统）
-- **描述**：游戏分类的层级分类体系
-- **状态**：planned
-- **后端目录**：`backend/models/`, `backend/services/category_service.py`
-- **前端目录**：`frontend/src/features/categories/`
-- **数据表**：`categories`
+### M002 — categories（分类系统） + tags（标签系统）
+
+- **描述**：游戏分类的层级分类体系，支持无限级嵌套、自动 Slug 生成、软删除；标签系统，支持分页、搜索、game_count
+- **状态**：completed
+- **版本**：0.4.0
+- **后端目录**：`backend/models/category.py`, `backend/models/tag.py`, `backend/repositories/category_repository.py`, `backend/repositories/tag_repository.py`, `backend/services/category_service.py`, `backend/services/tag_service.py`, `backend/api/v1/endpoints/categories.py`, `backend/api/v1/endpoints/tags.py`, `backend/schemas/category.py`, `backend/schemas/tag.py`
+- **前端目录**：`frontend/src/features/categories/`, `frontend/src/features/tags/`（待开发）
+- **数据表**：`categories`, `tags`, `game_tags`
+- **接口**：
+  - `GET /api/v1/categories` — 分类树（含 game_count + children）
+  - `GET /api/v1/categories/{slug}` — 分类详情
+  - `POST /api/v1/admin/categories` — 创建分类
+  - `PUT /api/v1/admin/categories/{id}` — 更新分类
+  - `DELETE /api/v1/admin/categories/{id}` — 软删除
+  - `GET /api/v1/tags` — 标签列表（分页 + 搜索）
+  - `GET /api/v1/tags/{slug}` — 标签详情
+  - `POST /api/v1/admin/tags` — 创建标签
+  - `PUT /api/v1/admin/tags/{id}` — 更新标签
+  - `DELETE /api/v1/admin/tags/{id}` — 软删除
 
 ### M003 — resources（资源文件）
 - **描述**：可下载的游戏资源文件，关联到游戏条目

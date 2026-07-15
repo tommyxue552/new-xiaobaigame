@@ -283,6 +283,244 @@ GET /api/v1/games?page=1&page_size=20&sort_by=created_at&sort_order=desc&categor
 - 数据可恢复，不会物理删除
 - 返回 200 + 成功消息
 
+## Category API (v0.4.0)
+
+### 公开接口
+
+#### GET /api/v1/categories
+
+获取完整分类树，支持无限层级嵌套。
+
+**无需参数**。
+
+**响应**：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": "uuid",
+      "name": "动作游戏",
+      "slug": "action",
+      "description": "动作类游戏",
+      "parent_id": null,
+      "sort_order": 0,
+      "game_count": 15,
+      "children": [
+        {
+          "id": "uuid",
+          "name": "射击游戏",
+          "slug": "shooter",
+          "description": null,
+          "parent_id": "uuid",
+          "sort_order": 0,
+          "game_count": 8,
+          "children": []
+        }
+      ]
+    }
+  ]
+}
+```
+
+每个节点包含 `children` 数组（递归）和 `game_count` 字段。
+
+#### GET /api/v1/categories/{slug}
+
+获取单个分类详情（含游戏数量）。
+
+**路径参数**：
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| slug | string | 分类 URL 标识 |
+
+**响应**：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": "uuid",
+    "name": "动作游戏",
+    "slug": "action",
+    "description": "动作类游戏",
+    "parent_id": null,
+    "sort_order": 0,
+    "game_count": 15,
+    "created_at": "2026-07-15T00:00:00Z",
+    "updated_at": "2026-07-15T00:00:00Z"
+  }
+}
+```
+
+### 管理接口
+
+> 注意：v0.4.0 版本暂无权限守卫，后续版本将添加认证。
+
+#### POST /api/v1/admin/categories
+
+创建分类。
+
+**请求体**：
+
+```json
+{
+  "name": "动作游戏",
+  "slug": "action",
+  "description": "动作类游戏",
+  "parent_id": null,
+  "sort_order": 0
+}
+```
+
+- `slug` 可选，不提供时自动从名称生成
+- `parent_id` 可选，为 null 时创建顶级分类
+- `sort_order` 默认 0
+- 分类名称必须唯一
+- 返回 201 Created
+
+#### PUT /api/v1/admin/categories/{id}
+
+更新分类。
+
+**路径参数**：`id` (UUID) - 分类 ID
+
+**请求体**：所有字段均为可选（只传需要更新的字段）。
+
+- 自动检测名称唯一性
+- `slug` 传空字符串时自动重新生成
+- `parent_id` 不允许设置为自身
+- 返回完整更新后的分类详情
+
+#### DELETE /api/v1/admin/categories/{id}
+
+软删除分类。
+
+**路径参数**：`id` (UUID) - 分类 ID
+
+- 设置 `deleted_at` 时间戳
+- 子分类的 `parent_id` 自动设为 NULL（数据库约束）
+- 数据可恢复
+- 返回 200 + 成功消息
+
 ---
 
-*最后更新：2026-07-15 | v0.3.0*
+## Tag API (v0.4.0)
+
+### 公开接口
+
+#### GET /api/v1/tags
+
+标签列表，支持分页和关键词搜索。
+
+**查询参数**：
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| page | int | 1 | 页码 (>=1) |
+| page_size | int | 20 | 每页数量 (1-100) |
+| keyword | string | - | 关键词搜索（名称/slug） |
+
+**响应**：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "items": [
+      {
+        "id": "uuid",
+        "name": "RPG",
+        "slug": "rpg",
+        "game_count": 25,
+        "created_at": "2026-07-15T00:00:00Z",
+        "updated_at": "2026-07-15T00:00:00Z"
+      }
+    ],
+    "total": 50,
+    "page": 1,
+    "page_size": 20,
+    "total_pages": 3
+  }
+}
+```
+
+#### GET /api/v1/tags/{slug}
+
+获取单个标签详情（含游戏数量）。
+
+**路径参数**：
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| slug | string | 标签 URL 标识 |
+
+**响应**：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": "uuid",
+    "name": "RPG",
+    "slug": "rpg",
+    "game_count": 25,
+    "created_at": "2026-07-15T00:00:00Z",
+    "updated_at": "2026-07-15T00:00:00Z"
+  }
+}
+```
+
+### 管理接口
+
+> 注意：v0.4.0 版本暂无权限守卫，后续版本将添加认证。
+
+#### POST /api/v1/admin/tags
+
+创建标签。
+
+**请求体**：
+
+```json
+{
+  "name": "RPG",
+  "slug": "rpg"
+}
+```
+
+- `slug` 可选，不提供时自动从名称生成
+- 标签名称必须唯一
+- 返回 201 Created
+
+#### PUT /api/v1/admin/tags/{id}
+
+更新标签。
+
+**路径参数**：`id` (UUID) - 标签 ID
+
+**请求体**：所有字段均为可选（只传需要更新的字段）。
+
+- 自动检测名称唯一性
+- `slug` 传空字符串时自动重新生成
+- 返回完整更新后的标签详情
+
+#### DELETE /api/v1/admin/tags/{id}
+
+软删除标签。
+
+**路径参数**：`id` (UUID) - 标签 ID
+
+- 设置 `deleted_at` 时间戳
+- 关联的 `game_tags` 自动级联删除
+- 数据可恢复
+- 返回 200 + 成功消息
+
+---
+
+*最后更新：2026-07-15 | v0.4.0*

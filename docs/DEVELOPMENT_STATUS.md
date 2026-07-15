@@ -8,12 +8,12 @@
 
 | 项目 | 详情 |
 |------|------|
-| **当前版本** | v0.3.0 |
-| **当前开发模块** | M001 (games) — 已完成 |
-| **完成百分比** | 12.5%（2/16 模块已完成） |
+| **当前版本** | v0.4.0 |
+| **当前开发模块** | M002 (categories) + Tags — 已完成 |
+| **完成百分比** | 18.75%（3/16 模块已完成） |
 | **当前负责人** | Codex |
-| **下一模块** | M002 (categories) — 分类系统 |
-| **当前状态** | Game API 完成，准备进入下一模块 |
+| **下一模块** | M004 (users) — 用户系统 |
+| **当前状态** | Category + Tag API 完成，准备进入下一模块 |
 | **是否阻塞** | 否 |
 | **风险** | 无 |
 
@@ -49,7 +49,7 @@
 |------|------|------|------|--------|
 | M000 | database-foundation | completed | 100% | Codex |
 | M001 | games | completed | 100% | Codex |
-| M002 | categories | planned | 0% | TBD |
+| M002 | categories | completed | 100% | Codex |
 | M003 | resources | planned | 0% | TBD |
 | M004 | users | planned | 0% | TBD |
 | M005 | auth | planned | 0% | TBD |

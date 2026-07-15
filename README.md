@@ -3,7 +3,7 @@
 > 锟斤拷戏锟斤拷源锟斤拷锟斤拷平台 锟斤拷 锟斤拷业锟斤拷全栈锟斤拷目
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.0-informational)]()
+[![Version](https://img.shields.io/badge/version-0.4.0-informational)]()
 
 ---
 
