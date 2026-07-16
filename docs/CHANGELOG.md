@@ -3,6 +3,42 @@
 鏈枃浠堕伒寰?[Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 鏍煎紡銆?
 
 
+## [0.8.0] - 2026-07-16
+
+### Added
+- M014 Admin Panel: complete admin backend
+  - Admin login page with JWT auth (/admin/login)
+  - Dashboard with stats cards and recent games list (/admin)
+  - Game management: list, search, pagination, create, edit, soft-delete (/admin/games)
+  - Category tree management: create, edit, delete, expand/collapse (/admin/categories)
+  - Tag management: search, create, edit, delete (/admin/tags)
+  - Download resource management: create, edit, delete, enable/disable, sort (/admin/downloads)
+  - Download provider management: create, edit, delete, enable/disable, sort (/admin/providers)
+  - System settings page (/admin/settings)
+- Backend admin endpoints:
+  - POST /api/v1/admin/auth/login - Admin JWT login
+  - GET /api/v1/admin/dashboard - Dashboard statistics
+  - GET /api/v1/admin/settings - Get site settings
+  - PUT /api/v1/admin/settings - Update site settings
+- Frontend admin components:
+  - AdminLayout / AdminSidebar - Dark sidebar layout
+  - Toaster - Toast notification system
+  - ConfirmDialog - Confirmation dialog
+  - dminFetch - Authenticated API client
+  - dmin-auth Zustand store - JWT token management
+- Admin types: AdminInfo, AdminLoginRequest/Response, DashboardStats, AdminGameCreate/Update, AdminCategoryCreate/Update, AdminTagCreate/Update, AdminDownloadCreate/Update, AdminProviderCreate/Update
+
+### Changed
+- rontend/package.json version updated to 0.8.0
+- ackend/core/config.py VERSION set to 0.8.0
+- ackend/api/v1/router.py added admin auth, dashboard, settings routers
+- docs/API.md added Admin Auth, Dashboard, Settings API docs
+- docs/PROJECT.md version updated
+- docs/MODULES.md M014 status changed to completed
+- docs/DEVELOPMENT_STATUS.md progress updated
+
+---
+
 ## [0.6.0] — 2026-07-16
 
 ### Added

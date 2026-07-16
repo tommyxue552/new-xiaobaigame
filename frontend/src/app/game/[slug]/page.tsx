@@ -79,7 +79,7 @@ export default async function GameDetailPage({ params }: GameDetailPageProps) {
     };
 
     if (relatedResult) {
-      relatedGames = relatedResult.items.filter((g) => g.id !== game.id);
+      relatedGames = relatedResult.items.filter((g: GameListItem) => g.id !== game.id);
     }
   } catch {
     downloadsData = {

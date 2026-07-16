@@ -16,7 +16,7 @@
 - 姣忎釜妯″潡鍙嫭绔嬪紑鍙戙€佹祴璇曘€侀儴缃?- 鏂囨。鍜屼唬鐮佸悓姝ョ淮鎶?- 鎵€鏈夎璁″喅绛栬褰曞湪妗?
 ## 褰撳墠鐗堟湰
 
-**v0.5.0** 鈥?Download API 瀹屾垚
+**v0.8.0** 鈥?Download API 瀹屾垚
 
 ## 鎶€鏈爤
 
@@ -59,7 +59,7 @@ Backend (FastAPI)
 | Phase 0 | v0.1.0 | 椤圭洰鍒濆鍖栵紙宸插畬鎴愶級 |
 | Phase 0.1 | v0.1.1 | 鏂囨。瑙勮寖澧炲己锛堝凡瀹屾垚锛?|
 | Phase 1 | v0.2.0+ | database-foundation, games, categories, users, auth |
-| Phase 2 | v0.5.0 | download |
+| Phase 2 | v0.8.0 | download |
 | Phase 3 | v0.6.x | search, comments, ratings |
 | Phase 4 | v0.7.x | collections, notifications, admin, analytics |
 
@@ -132,4 +132,4 @@ Phase 5 (v0.6~0.7)  鎬ц兘浼樺寲 + 瀹夊叏鍔犲浐 + 鍥介檯鍖?Phase 
 姣忎釜闃舵瀹屾垚鍚庢墠杩涘叆涓嬩竴闃舵锛屼笉鎻愬墠寮€鍙戝悗缁樁娈垫ā鍧椼€?
 ---
 
-*鏈€鍚庢洿鏂帮細2026-07-16 | v0.5.0*
+*鏈€鍚庢洿鏂帮細2026-07-16 | v0.8.0*

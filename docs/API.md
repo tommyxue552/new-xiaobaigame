@@ -744,3 +744,133 @@ GET /api/v1/games?page=1&page_size=20&sort_by=created_at&sort_order=desc&categor
 ---
 
 *最后更新：2026-07-16 | v0.5.0*
+
+## Admin Auth API (v0.8.0)
+
+### POST /api/v1/admin/auth/login
+
+Admin login, returns JWT access token.
+
+**Request Body**:
+
+ + '`json' + 
+{
+  "username": "admin",
+  "password": "password123"
+}
+ + '`' + 
+
+**Response (200)**:
+
+ + '`json' + 
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "access_token": "eyJ...",
+    "token_type": "bearer",
+    "admin": {
+      "id": "uuid",
+      "username": "admin",
+      "email": "admin@xiaobaigame.com",
+      "display_name": "Administrator",
+      "role": "super_admin"
+    }
+  }
+}
+ + '`' + 
+
+**Error Responses**:
+
+| Status | Code | Message |
+|--------|------|---------|
+| 400 | 2000 | Validation error |
+| 401 | 1000 | Invalid credentials |
+
+---
+
+## Admin Dashboard API (v0.8.0)
+
+### GET /api/v1/admin/dashboard
+
+Get dashboard statistics.
+
+**Requires** Bearer Token (admin JWT).
+
+**Response (200)**:
+
+ + '`json' + 
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "games_count": 42,
+    "categories_count": 12,
+    "tags_count": 35,
+    "downloads_count": 68,
+    "recent_games": [
+      {
+        "id": "uuid",
+        "title": "Game Title",
+        "slug": "game-slug",
+        "cover": "https://...",
+        "status": "published",
+        "published_at": "2026-07-16T00:00:00Z",
+        "created_at": "2026-07-16T00:00:00Z"
+      }
+    ]
+  }
+}
+ + '`' + 
+
+---
+
+## Admin Settings API (v0.8.0)
+
+### GET /api/v1/admin/settings
+
+Get all site settings as key-value pairs.
+
+**Requires** Bearer Token (admin JWT).
+
+**Response (200)**:
+
+ + '`json' + 
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "site_name": "xiaobaigame",
+    "site_logo": null,
+    "site_description": "A game resource sharing site",
+    "seo_title": null,
+    "seo_keywords": null,
+    "seo_description": null,
+    "icp_beian": null,
+    "analytics_code": null
+  }
+}
+ + '`' + 
+
+### PUT /api/v1/admin/settings
+
+Update site settings. Only provided fields are updated.
+
+**Requires** Bearer Token (admin JWT).
+
+**Request Body** (all fields optional):
+
+ + '`json' + 
+{
+  "site_name": "New Site Name",
+  "site_description": "New description",
+  "seo_title": "SEO Title",
+  "seo_keywords": "keyword1,keyword2",
+  "seo_description": "SEO description text"
+}
+ + '`' + 
+
+**Response (200)**: Returns the updated settings object (same shape as GET).
+
+---
+
