@@ -8,7 +8,7 @@
 
 | 项目 | 详情 |
 |------|------|
-| **当前版本** | v0.8.0 |
+| **当前版本** | v0.9.0 |
 | **当前开发模块** | M016 (frontend-home) — 已完成 |
 | **完成百分比** | 35%（6/17 模块已完成） |
 | **当前负责人** | Codex |
@@ -89,6 +89,8 @@
 | M014 | admin | completed | 100% | Codex |
 | M016 | frontend-home | completed | 100% | Codex |
 | M017 | game-detail | completed | 100% | Codex |
+| M018 | download-jump | completed | 100% | Codex |
+| M017 | game-detail | completed | 100% | Codex |
 | M015 | analytics | planned | 0% | TBD |
 
 ---
@@ -122,4 +124,4 @@
 
 ---
 
-*最后更新：2026-07-16 | v0.8.0*
+*最后更新：2026-07-16 | v0.9.0*

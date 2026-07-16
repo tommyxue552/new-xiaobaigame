@@ -3,6 +3,29 @@
 鏈枃浠堕伒寰?[Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 鏍煎紡銆?
 
 
+
+## [0.9.0] - 2026-07-16
+
+### Added
+- M018 Download Jump: /download/[id] SSR page with mobile/PC device detection
+  - Backend GET /api/v1/downloads/{id} public endpoint for download resource lookup
+  - SSR page with server-side QR code generation via qrcode library
+  - Mobile device: 302 redirect to real download URL
+  - PC device: QR code display with provider info and extract code
+  - DownloadJumpView client component (game title, provider badge, QR, back button)
+- New files: download_jump.py, page.tsx, DownloadJumpView.tsx
+- npm: qrcode + @types/qrcode packages
+- AGENTS.md Section 20: Module Completion Self-Check rule
+
+### Changed
+- backend/core/config.py VERSION set to 0.9.0
+- frontend/package.json version updated to 0.9.0
+- backend/api/v1/router.py registered download_jump_router
+- frontend/src/components/game/DownloadSection.tsx button links to /download/{id}
+- All docs (API, PROJECT, MODULES, CHANGELOG, DEVELOPMENT_STATUS) updated
+
+---
+
 ## [0.8.0] - 2026-07-16
 
 ### Added

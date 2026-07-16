@@ -745,6 +745,54 @@ GET /api/v1/games?page=1&page_size=20&sort_by=created_at&sort_order=desc&categor
 
 *最后更新：2026-07-16 | v0.5.0*
 
+
+## Download Jump API (v0.9.0)
+
+### GET /api/v1/downloads/{id}
+
+Get a single download resource by ID for the download jump / QR code page.
+
+Only returns active resources from enabled providers.
+
+**Path parameters**:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| id | uuid | Download resource ID |
+
+**Response (200)**:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": "uuid",
+    "game_id": "uuid",
+    "game_title": "Game Title",
+    "game_slug": "game-slug",
+    "download_url": "https://pan.baidu.com/s/xxxx",
+    "extract_code": "abcd",
+    "provider": {
+      "id": "uuid",
+      "name": "Baidu Netdisk",
+      "slug": "baidu",
+      "icon_url": null
+    }
+  }
+}
+```
+
+**Error Responses**:
+
+| Status | Code | Message |
+|--------|------|---------|
+| 404 | 3000 | Download resource not found |
+| 404 | 3000 | Download resource is not active |
+| 404 | 3000 | Download provider is not available |
+| 404 | 3000 | Game not found |
+
+---
 ## Admin Auth API (v0.8.0)
 
 ### POST /api/v1/admin/auth/login

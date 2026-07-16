@@ -1,4 +1,4 @@
-﻿"""Application configuration via Pydantic settings."""
+"""Application configuration via Pydantic settings."""
 
 from typing import List
 
@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # Project
     PROJECT_NAME: str = "web-xiaobaigame"
-    VERSION: str = "0.8.0"
+    VERSION: str = "0.9.0"
     DEBUG: bool = False
 
     # API

@@ -1,4 +1,4 @@
-﻿export interface DownloadProviderBrief {
+export interface DownloadProviderBrief {
   id: string;
   name: string;
   slug: string;
@@ -22,4 +22,15 @@ export interface GameDownloadsResponse {
   game_title: string;
   game_slug: string;
   downloads: DownloadResource[];
+}
+
+/** Response from GET /api/v1/downloads/{id} */
+export interface DownloadDetailResponse {
+  id: string;
+  game_id: string;
+  game_title: string;
+  game_slug: string;
+  download_url: string;
+  extract_code: string | null;
+  provider: DownloadProviderBrief;
 }

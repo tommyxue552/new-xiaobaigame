@@ -23,6 +23,8 @@
 | M013 | notifications | planned | TBD | 0.3.0 | M004 | 14 | 0% | - | 鍚?|
 | M014 | admin | planned | TBD | 0.2.0 | M005 | 15 | 0% | - | 鍚?|
 | M016 | frontend-home | completed | Codex | 0.6.0 | M001, M002, M008 | 8.5 | 100% | pending | 鍚?|
+| M017 | game-detail | completed | Codex | 0.7.0 | M001, M002, M008 | 9 | 100% | pending | ? |
+| M018 | download-jump | completed | Codex | 0.9.0 | M008, M001 | 10 | 100% | pending | ? |
 | M015 | analytics | planned | TBD | 0.4.0 | - | 16 | 0% | - | 鍚?|
 
 ---
@@ -197,12 +199,20 @@ M015 (analytics) 鈥?鐙珛妯″潡锛屾棤渚濊禆
 | changes_requested | 闇€瑕佷慨鏀?|
 | blocked | Review 闃诲 |
 
----
 
-## 鍐荤粨璇存槑
+### M017 ? game-detail???????
+- **??**??????????????????????????????
+- **??**?completed
+- **??**?0.7.0
+- **????**?`frontend/src/app/game/[slug]/`, `frontend/src/components/game/`
+- **??**?GameHeader, GameInfo, GameGallery, DownloadSection, RelatedGames, GameDetailSkeleton, TagList, Breadcrumb
 
-褰撴ā鍧楀洜澶栭儴鍘熷洜闇€瑕佹殏鍋滃紑鍙戞椂锛屾爣璁颁负鍐荤粨锛?- 鍐荤粨鐨勬ā鍧楃洰褰曞拰浠ｇ爜淇濈暀
-- 涓嶅緱鍦ㄥ喕缁撴湡闂翠慨鏀瑰喕缁撴ā鍧?- 瑙ｅ喕闇€鍦?DECISIONS.md 涓褰曞師鍥?- 鐩墠鏃犲喕缁撴ā鍧?
----
+### M018 ? download-jump??????
+- **??**??????????????????????PC ??????
+- **??**?completed
+- **??**?0.9.0
+- **??**?M008 (download), M001 (games)
+- **????**?`backend/api/v1/endpoints/download_jump.py`
+- *
 
-*鏈€鍚庢洿鏂帮細2026-07-16 | v0.5.0*
+*?????2026-07-16 | v0.9.0*
