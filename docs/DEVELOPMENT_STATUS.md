@@ -8,12 +8,12 @@
 
 | 项目 | 详情 |
 |------|------|
-| **当前版本** | v0.6.0 |
+| **当前版本** | v0.7.0 |
 | **当前开发模块** | M016 (frontend-home) — 已完成 |
-| **完成百分比** | 29%（5/17 模块已完成） |
+| **完成百分比** | 35%（6/17 模块已完成） |
 | **当前负责人** | Codex |
-| **下一模块** | M006 (search) — 全文搜索 |
-| **当前状态** | Frontend Home 完成，准备进入搜索模块 |
+| **下一模块** | M003 (resources) — 资源文件模块 |
+| **当前状态** | Game Detail 完成，准备进入资源模块 |
 | **是否阻塞** | 否 |
 | **风险** | 无 |
 
@@ -24,6 +24,26 @@
 | 文件 | 变更类型 | 日期 |
 |------|---------|------|
 | frontend/src/components/layout/Header.tsx | 新增 | 2026-07-16 |
+| frontend/src/types/download.ts | 新增 | 2026-07-16 |
+| frontend/src/features/downloads/api.ts | 新增 | 2026-07-16 |
+| frontend/src/components/shared/Breadcrumb.tsx | 新增 | 2026-07-16 |
+| frontend/src/components/game/TagList.tsx | 新增 | 2026-07-16 |
+| frontend/src/components/game/GameHeader.tsx | 新增 | 2026-07-16 |
+| frontend/src/components/game/GameInfo.tsx | 新增 | 2026-07-16 |
+| frontend/src/components/game/GameGallery.tsx | 新增 | 2026-07-16 |
+| frontend/src/components/game/DownloadSection.tsx | 新增 | 2026-07-16 |
+| frontend/src/components/game/RelatedGames.tsx | 新增 | 2026-07-16 |
+| frontend/src/components/game/GameDetailSkeleton.tsx | 新增 | 2026-07-16 |
+| frontend/src/app/game/[slug]/page.tsx | 新增 | 2026-07-16 |
+| frontend/src/app/game/[slug]/loading.tsx | 新增 | 2026-07-16 |
+| frontend/src/app/game/[slug]/error.tsx | 新增 | 2026-07-16 |
+| frontend/src/app/game/[slug]/not-found.tsx | 新增 | 2026-07-16 |
+| frontend/package.json | 修改 | 2026-07-16 |
+| backend/core/config.py | 修改 | 2026-07-16 |
+| docs/PROJECT.md | 更新 | 2026-07-16 |
+| docs/MODULES.md | 更新 | 2026-07-16 |
+| docs/CHANGELOG.md | 更新 | 2026-07-16 |
+| docs/DEVELOPMENT_STATUS.md | 更新 | 2026-07-16 |
 | frontend/src/components/layout/Footer.tsx | 新增 | 2026-07-16 |
 | frontend/src/components/home/HeroBanner.tsx | 新增 | 2026-07-16 |
 | frontend/src/components/home/CategorySection.tsx | 新增 | 2026-07-16 |
@@ -68,6 +88,7 @@
 | M013 | notifications | planned | 0% | TBD |
 | M014 | admin | planned | 0% | TBD |
 | M016 | frontend-home | completed | 100% | Codex |
+| M017 | game-detail | completed | 100% | Codex |
 | M015 | analytics | planned | 0% | TBD |
 
 ---
@@ -101,4 +122,4 @@
 
 ---
 
-*最后更新：2026-07-16 | v0.6.0*
+*最后更新：2026-07-16 | v0.7.0*

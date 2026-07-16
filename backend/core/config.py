@@ -1,4 +1,4 @@
-"""Application configuration via Pydantic settings."""
+﻿"""Application configuration via Pydantic settings."""
 
 from typing import List
 
