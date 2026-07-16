@@ -1,4 +1,4 @@
-﻿# PROJECT.md — 项目总览
+# PROJECT.md — 项目总览
 
 ## 项目定位
 

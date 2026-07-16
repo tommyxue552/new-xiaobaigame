@@ -1,4 +1,4 @@
-﻿# MODULES.md — 模块清单
+# MODULES.md — 模块清单
 
 > 本文档记录项目的所有模块及其状态。每个模块必须登记后才能开始开发。
 
@@ -23,6 +23,7 @@
 | M012 | collections | planned | TBD | 0.3.0 | M004, M001 | 13 | 0% | - | 否 |
 | M013 | notifications | planned | TBD | 0.3.0 | M004 | 14 | 0% | - | 否 |
 | M014 | admin | planned | TBD | 0.2.0 | M005 | 15 | 0% | - | 否 |
+| M016 | frontend-home | completed | Codex | 0.6.0 | M001, M002, M008 | 8.5 | 100% | pending | 否 |
 | M015 | analytics | planned | TBD | 0.4.0 | - | 16 | 0% | - | 否 |
 
 ---
@@ -191,6 +192,18 @@ M015 (analytics) — 独立模块，无依赖
 
 ---
 
+
+### M016 — frontend-home（前端首页）
+- **描述**：网站首页开发，包含 Header、Footer、Hero Banner、分类入口、游戏卡片、分页等
+- **状态**：completed
+- **版本**：0.6.0
+- **前端目录**：`frontend/src/app/page.tsx`, `frontend/src/components/`
+- **API 调用**：
+  - `GET /api/v1/games` — 游戏列表（最新/热门/分页）
+  - `GET /api/v1/categories` — 分类树
+- **组件**：Header, Footer, HeroBanner, CategorySection, FeaturedGames, GameCard, GameGrid, Pagination, Skeleton, EmptyState
+
+---
 ## 状态说明
 | 状态 | 含义 |
 |------|------|
