@@ -6,6 +6,24 @@
 
 
 
+
+## [v1.0.2] - 2026-07-16
+
+### Added
+- `docs/OPERATION.md` — 运营运维手册，包含 12 个运营流程和 Checklist
+- AGENTS.md Section 21: 稳定模块保护规则
+- AGENTS.md Section 22: 模块开发完成规则
+- AGENTS.md Section 23: 上下文恢复规则（增强版）
+
+### Changed
+- AGENTS.md Section 20: 模块完成自检规则重写，新增 9 项检查清单
+- 版本号：v1.0.1 → v1.0.2
+- PROJECT.md、DEVELOPMENT_STATUS.md 同步更新
+
+### Fixed
+- AGENTS.md Section 20 乱码文本修复
+
+---
 ## [v1.0.1] - 2026-07-16
 
 ### Fixed
