@@ -1,15 +1,38 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { SITE_NAME } from "@/lib/constants";
+import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${SITE_NAME} - Game Resource Sharing`,
     template: `%s | ${SITE_NAME}`,
   },
-  description: "A community-driven platform for sharing game resources.",
+  description: SITE_DESCRIPTION,
+  keywords: "game resources, game mods, game saves, game downloads, game tools",
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "zh_CN",
+    title: `${SITE_NAME} - Game Resource Sharing`,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} - Game Resource Sharing`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/icon-192.png",
+  },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({

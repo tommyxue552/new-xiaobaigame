@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { getGames, getHotGames } from "@/features/games/api";
 import { getCategories } from "@/features/categories/api";
-import { SITE_NAME } from "@/lib/constants";
+import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
+import { generateWebsiteJsonLd } from "@/lib/seo";
 import { HeroBanner } from "@/components/home/HeroBanner";
 import { CategorySection } from "@/components/home/CategorySection";
 import { FeaturedGames } from "@/components/home/FeaturedGames";
@@ -14,13 +15,19 @@ import type { CategoryTreeNode } from "@/types/category";
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} - Game Resource Sharing`,
-  description:
-    "Discover and share game resources — mods, saves, tools, and more. A community-driven platform for game resource sharing.",
+  description: SITE_DESCRIPTION,
+  keywords: "game resources, game mods, game saves, game downloads, game tools, free game resources",
   openGraph: {
     title: `${SITE_NAME} - Game Resource Sharing`,
-    description:
-      "Discover and share game resources — mods, saves, tools, and more.",
+    description: SITE_DESCRIPTION,
     type: "website",
+    siteName: SITE_NAME,
+    locale: "zh_CN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} - Game Resource Sharing`,
+    description: SITE_DESCRIPTION,
   },
   alternates: {
     canonical: "/",
@@ -36,7 +43,6 @@ function PaginatedGameList({
   games,
   page,
   totalPages,
-  basePath,
 }: {
   games: GameListItem[];
   page: number;
@@ -60,7 +66,6 @@ function PaginatedGameList({
           currentPage={page}
           totalPages={totalPages}
           onPageChange={(newPage) => {
-            // Client-side navigation via URL change
             const url = new URL(window.location.href);
             url.searchParams.set("page", String(newPage));
             window.location.href = url.toString();
@@ -75,7 +80,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const page = Math.max(1, Number(searchParams.page) || 1);
   const pageSize = 12;
 
-  // Fetch data in parallel
   const [latestData, hotData, categories] = await Promise.all([
     getGames({
       page,
@@ -87,34 +91,38 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     getCategories(),
   ]);
 
+  const websiteJsonLd = generateWebsiteJsonLd();
+
   return (
-    <div className="min-h-screen">
-      {/* Hero Banner */}
-      <HeroBanner />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <div className="min-h-screen">
+        <HeroBanner />
 
-      {/* Category Section */}
-      <div className="py-10">
-        <CategorySection categories={categories} />
+        <div className="py-10">
+          <CategorySection categories={categories} />
+        </div>
+
+        <div className="py-10">
+          <FeaturedGames
+            latestGames={latestData.items}
+            hotGames={hotData.items}
+          />
+        </div>
+
+        <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-xl font-bold text-foreground">All Games</h2>
+          <PaginatedGameList
+            games={latestData.items}
+            page={latestData.page}
+            totalPages={latestData.total_pages}
+            basePath="/"
+          />
+        </section>
       </div>
-
-      {/* Latest & Hot Games with tabs */}
-      <div className="py-10">
-        <FeaturedGames
-          latestGames={latestData.items}
-          hotGames={hotData.items}
-        />
-      </div>
-
-      {/* Paginated game list */}
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-        <h2 className="mb-6 text-xl font-bold text-foreground">All Games</h2>
-        <PaginatedGameList
-          games={latestData.items}
-          page={latestData.page}
-          totalPages={latestData.total_pages}
-          basePath="/"
-        />
-      </section>
-    </div>
+    </>
   );
 }

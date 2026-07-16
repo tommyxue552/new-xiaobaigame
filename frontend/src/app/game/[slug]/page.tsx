@@ -1,9 +1,10 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGameBySlug } from "@/features/games/api";
 import { getGameDownloads } from "@/features/downloads/api";
 import { getGames } from "@/features/games/api";
 import { SITE_NAME } from "@/lib/constants";
+import { generateGameMetadata, generateGameJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo";
 import { GameHeader } from "@/components/game/GameHeader";
 import { GameInfo } from "@/components/game/GameInfo";
 import { GameGallery } from "@/components/game/GameGallery";
@@ -17,7 +18,6 @@ interface GameDetailPageProps {
   params: { slug: string };
 }
 
-/** Generate dynamic metadata for SEO. */
 export async function generateMetadata({
   params,
 }: GameDetailPageProps): Promise<Metadata> {
@@ -28,22 +28,16 @@ export async function generateMetadata({
     return { title: `Game Not Found | ${SITE_NAME}` };
   }
 
-  const title = game.seo_title || `${game.title} | ${SITE_NAME}`;
-  const description = game.seo_description || game.summary || `${game.title} game detail page.`;
-  const keywords = game.seo_keywords || undefined;
-
-  return {
-    title,
-    description,
-    keywords,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      images: game.cover ? [{ url: game.cover }] : undefined,
-    },
-    alternates: { canonical: `/game/${game.slug}` },
-  };
+  return generateGameMetadata({
+    title: game.title,
+    titleEn: game.title_en,
+    summary: game.summary,
+    cover: game.cover,
+    slug: game.slug,
+    seoTitle: game.seo_title,
+    seoKeywords: game.seo_keywords,
+    seoDescription: game.seo_description,
+  });
 }
 
 export default async function GameDetailPage({ params }: GameDetailPageProps) {
@@ -79,7 +73,9 @@ export default async function GameDetailPage({ params }: GameDetailPageProps) {
     };
 
     if (relatedResult) {
-      relatedGames = relatedResult.items.filter((g: GameListItem) => g.id !== game.id);
+      relatedGames = relatedResult.items.filter(
+        (g: GameListItem) => g.id !== game.id
+      );
     }
   } catch {
     downloadsData = {
@@ -90,34 +86,40 @@ export default async function GameDetailPage({ params }: GameDetailPageProps) {
     };
   }
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    name: game.title,
-    ...(game.title_en ? { alternateName: game.title_en } : {}),
-    description: game.summary || "",
-    image: game.cover || undefined,
-    ...(game.category ? { genre: [game.category.name] } : {}),
-    datePublished: game.published_at || undefined,
-    interactionStatistic: [
-      {
-        "@type": "InteractionCounter",
-        interactionType: "https://schema.org/DownloadAction",
-        userInteractionCount: game.download_count,
-      },
-      {
-        "@type": "InteractionCounter",
-        interactionType: "https://schema.org/ViewAction",
-        userInteractionCount: game.view_count,
-      },
-    ],
-  };
+  const gameJsonLd = generateGameJsonLd({
+    title: game.title,
+    titleEn: game.title_en,
+    summary: game.summary,
+    cover: game.cover,
+    slug: game.slug,
+    category: game.category
+      ? { name: game.category.name, slug: game.category.slug }
+      : null,
+    publishedAt: game.published_at,
+    downloadCount: game.download_count,
+    viewCount: game.view_count,
+  });
+
+  const breadcrumbItems = [];
+  if (game.category) {
+    breadcrumbItems.push({
+      name: game.category.name,
+      url: `/category/${game.category.slug}`,
+    });
+  }
+  breadcrumbItems.push({ name: game.title });
+
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(gameJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <GameHeader game={game} />

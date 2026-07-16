@@ -1,9 +1,10 @@
-﻿import { apiFetch } from "@/lib/api";
-import type { CategoryTreeNode } from "@/types/category";
+import { apiFetch } from "@/lib/api";
+import type { CategoryTreeNode, Category } from "@/types/category";
 
-/**
- * Fetch the full category tree (public endpoint).
- */
 export async function getCategories(): Promise<CategoryTreeNode[]> {
   return apiFetch<CategoryTreeNode[]>("/categories");
+}
+
+export async function getCategoryBySlug(slug: string): Promise<Category> {
+  return apiFetch<Category>(`/categories/${slug}`);
 }

@@ -12,7 +12,8 @@ interface DownloadPageProps {
   params: { id: string };
 }
 
-const MOBILE_REGEX = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i;
+const MOBILE_REGEX =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i;
 
 function isMobileDevice(userAgent: string | null): boolean {
   if (!userAgent) return false;
@@ -26,13 +27,30 @@ export async function generateMetadata({
   try {
     data = await getDownloadById(params.id);
   } catch {
-    return { title: `Download | ${SITE_NAME}` };
+    return {
+      title: `Download | ${SITE_NAME}`,
+      robots: { index: false, follow: false },
+    };
   }
 
+  const title = `Download ${data.game_title} - ${data.provider.name} | ${SITE_NAME}`;
+  const description = `Download ${data.game_title} via ${data.provider.name}. Extract code: ${data.extract_code || "N/A"}.`;
+
   return {
-    title: `Download ${data.game_title} - ${data.provider.name} | ${SITE_NAME}`,
-    description: `Download ${data.game_title} via ${data.provider.name}.`,
+    title,
+    description,
     robots: { index: false, follow: false },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: SITE_NAME,
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
   };
 }
 

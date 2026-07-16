@@ -1,156 +1,146 @@
-﻿# SEO.md — SEO 规范
+# SEO.md - SEO Configuration & Strategy
 
-## URL 规范
-
-### 规则
-- 使用语义化 URL：`/games/zelda-breath-of-the-wild`
-- 全小写，连字符分隔
-- 避免数字 ID 在 URL 中暴露
-- 使用 slug 替代标题
-
-### 示例
-```
-✅ /games/zelda-breath-of-the-wild
-✅ /categories/action-adventure
-❌ /games/123
-❌ /Games/Zelda_Breath_of_the_Wild
-```
+> This document describes the SEO implementation for web-xiaobaigame.
 
 ---
 
-## Canonical URL
+## Overview
 
-- 每个页面指定规范的 canonical URL
-- 避免重复内容被搜索引擎惩罚
-
-```html
-<link rel="canonical" href="https://xiaobaigame.com/games/zelda-breath-of-the-wild" />
-```
+The SEO module (M009) provides comprehensive search engine optimization across all pages. All SEO data is **dynamically generated** from the database, with sensible defaults when data is missing.
 
 ---
 
-## Meta Tags
+## Sitemaps
 
-### 基础 Meta
-```html
-<title>Game Title - xiaobaigame</title>
-<meta name="description" content="Download game resources, mods, saves for Game Title. Community-driven platform." />
-```
+### Generated Sitemaps
 
-### Open Graph
-```html
-<meta property="og:title" content="Game Title - xiaobaigame" />
-<meta property="og:description" content="Download game resources for Game Title." />
-<meta property="og:image" content="https://xiaobaigame.com/images/games/zelda-cover.jpg" />
-<meta property="og:url" content="https://xiaobaigame.com/games/zelda" />
-<meta property="og:type" content="website" />
-```
+| Sitemap | URL | Content |
+|---------|-----|---------|
+| Sitemap Index | `/sitemap.xml` | References all sub-sitemaps |
+| Games Sitemap | `/sitemap-games.xml` | All published games |
+| Categories Sitemap | `/sitemap-categories.xml` | All categories |
+| Tags Sitemap | `/sitemap-tags.xml` | All tags |
 
-### Twitter Card
-```html
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Game Title - xiaobaigame" />
-<meta name="twitter:description" content="Download game resources for Game Title." />
-<meta name="twitter:image" content="https://xiaobaigame.com/images/games/zelda-cover.jpg" />
-```
+All sitemaps are dynamically generated via Next.js route handlers, fetching data from backend API.
 
----
-
-## 结构化数据 (JSON-LD)
-
-### 游戏详情页
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "VideoGame",
-  "name": "Game Title",
-  "description": "Game description here.",
-  "genre": ["Action", "Adventure"],
-  "image": "https://xiaobaigame.com/images/games/zelda-cover.jpg",
-  "url": "https://xiaobaigame.com/games/zelda"
-}
-```
-
-### Breadcrumb
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaobaigame.com" },
-    { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://xiaobaigame.com/games" },
-    { "@type": "ListItem", "position": 3, "name": "Game Title" }
-  ]
-}
-```
-
----
-
-## Sitemap
-
-- 自动生成 XML Sitemap
-- 按优先级包含：首页 > 分类页 > 详情页 > 标签页
-- 更新频率：每日
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://xiaobaigame.com/games/zelda</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-</urlset>
-```
+### Priority Assignments
+- Home page: 1.0 (daily)
+- Games with cover: 0.9 (weekly)
+- Games without cover: 0.7 (weekly)
+- Categories: 0.6 (weekly)
+- Tags: 0.4 (weekly)
 
 ---
 
 ## Robots.txt
 
-```
-User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /admin/
-Sitemap: https://xiaobaigame.com/sitemap.xml
-```
+Served at `/robots.txt`, configured via Next.js `app/robots.ts`.
+
+- Allows all crawlers at `/`
+- Disallows: `/admin/`, `/api/`, `/download/`
+- References sitemap index URL
 
 ---
 
-## RSS Feed
+## Per-Page SEO
 
-- 提供最新资源 RSS 订阅
-- 格式：RSS 2.0 / Atom
-- URL：`/feed.xml` 或 `/rss.xml`
+### Home Page (`/`)
+- **Title**: xiaobaigame - Game Resource Sharing
+- **Description**: Discover and share game resources...
+- **OpenGraph**: website type, summary_large_image
+- **JSON-LD**: WebSite + SearchAction
+
+### Category Page (`/category/{slug}`)
+- **Title**: {Category Name} Games | xiaobaigame
+- **Description**: From category description or auto-generated
+- **JSON-LD**: CollectionPage
+
+### Tag Page (`/tag/{slug}`)
+- **Title**: {Tag Name} Games | xiaobaigame
+- **Description**: Browse {tag} games and resources
+- **JSON-LD**: CollectionPage
+
+### Game Detail (`/game/{slug}`)
+- **Title**: From seo_title field or "{game.title} | xiaobaigame"
+- **Description**: From seo_description or summary or auto-generated
+- **Keywords**: From seo_keywords field
+- **OpenGraph**: article type
+- **JSON-LD**: VideoGame + BreadcrumbList
+
+### Download Page (`/download/{id}`)
+- **Title**: Download {game} - {provider} | xiaobaigame
+- **Robots**: noindex, nofollow
+
+### 404 Page
+- **Title**: Page Not Found | xiaobaigame
+- **Robots**: noindex, nofollow
+- **JSON-LD**: WebPage
 
 ---
 
-## 分页 SEO
+## Image Optimization
 
-- 使用 `rel="next"` 和 `rel="prev"` 链接
-- 或使用 `rel="canonical"` 指向第一页
-- 分页 URL：`/games?page=2`
-
-```html
-<link rel="next" href="/games?page=3" />
-<link rel="prev" href="/games?page=1" />
-```
+All images use Next.js `<Image>` component with:
+- `alt` text (always present)
+- `fill` with parent aspect ratio (for responsive)
+- `sizes` attribute for responsive sizing
+- `loading="lazy"` for below-fold images
+- `priority` for above-fold images
 
 ---
 
-## 分类/TAG SEO
+## Structured Data (JSON-LD)
 
-### 分类页
-- 标题格式：`{Category Name} Games - xiaobaigame`
-- 描述：包含分类关键词
-- H1：分类名称
-
-### TAG 页
-- 每个 TAG 有独立页面（如需要）
-- Meta description 包含 TAG 关键词
-- 避免 TAG 页内容过于单薄
+| Page | Schema Type |
+|------|-------------|
+| Home | WebSite + SearchAction |
+| Game Detail | VideoGame + BreadcrumbList |
+| Category | CollectionPage |
+| Tag | CollectionPage |
+| 404 | WebPage |
 
 ---
 
-*最后更新：2026-07-15 | v0.1.0*
+## PWA / Other
+
+| File | Purpose |
+|------|---------|
+| `/manifest.webmanifest` | PWA manifest |
+| `/browserconfig.xml` | Windows tile config |
+| `/favicon.ico` | Favicon |
+
+---
+
+## Performance
+
+- Sitemaps cached for 1 hour (CDN-friendly)
+- All data fetched server-side at request time
+- Gzip supported by Next.js (automatic)
+- CDN-ready architecture
+
+---
+
+## SEO Data Priority
+
+For game detail pages, SEO fields follow this priority:
+
+1. **Database** (seo_title, seo_keywords, seo_description fields in `games` table)
+2. **Auto-generated defaults** (from game title, summary, etc.)
+
+This ensures admins can customize SEO per game while having sensible defaults.
+
+---
+
+## URL Structure
+
+| Page | URL Pattern |
+|------|------------|
+| Home | `/` |
+| Game Detail | `/game/{slug}` |
+| Category | `/category/{slug}` |
+| Tag | `/tag/{slug}` |
+| Download | `/download/{id}` |
+
+---
+
+*Last updated: 2026-07-16 | v1.0.0*

@@ -81,7 +81,7 @@
 | M006 | search | planned | 0% | TBD |
 | M007 | upload | planned | 0% | TBD |
 | M008 | download | completed | 100% | Codex |
-| M009 | seo | planned | 0% | TBD |
+| M009 | seo | completed | 100% | Codex |
 | M010 | comments | planned | 0% | TBD |
 | M011 | ratings | planned | 0% | TBD |
 | M012 | collections | planned | 0% | TBD |
