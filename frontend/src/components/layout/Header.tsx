@@ -4,9 +4,6 @@ import { SITE_NAME } from "@/lib/constants";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Categories", href: "/categories" },
-  { label: "Hot", href: "/hot" },
-  { label: "Latest", href: "/latest" },
 ];
 
 /** Site header with logo, nav, and search placeholder. */

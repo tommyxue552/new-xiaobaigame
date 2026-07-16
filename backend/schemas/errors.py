@@ -1,4 +1,4 @@
-﻿"""Unified error codes for the entire application.
+"""Unified error codes for the entire application.
 
 Error code ranges:
   1000-1999  Authentication / Authorization

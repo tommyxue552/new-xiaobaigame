@@ -1,4 +1,4 @@
-﻿"""Tag API endpoints — public listing + admin CRUD."""
+"""Tag API endpoints — public listing + admin CRUD."""
 
 import math
 import uuid

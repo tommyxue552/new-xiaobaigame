@@ -5,6 +5,19 @@
 
 
 
+
+## [v1.0.1] - 2026-07-16
+
+### Fixed
+- CategorySection: fixed broken links pointing to `/categories/` instead of `/category/`
+- Header: removed dead navigation links to `/categories`, `/hot`, `/latest` (pages not yet implemented)
+- Backend: removed unused imports (`or_`, `Optional` x2, `SitemapIndexEntry`) from 4 files
+- Backend: stripped UTF-8 BOM characters from all 66 Python source files
+- Frontend: removed unused `basePath` prop from `PaginatedGameList` component
+- Docs: fixed API.md settings endpoint to show correct nested request body format
+
+### Changed
+- Version bump: 1.0.0 ? 1.0.1
 ## [v1.0.0] - 2026-07-16
 
 ### Added (SEO Module M009)

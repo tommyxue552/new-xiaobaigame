@@ -1,4 +1,4 @@
-﻿"""Game service 鈥?business logic for game operations."""
+"""Game service 鈥?business logic for game operations."""
 
 import re
 import unicodedata

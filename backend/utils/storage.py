@@ -1,4 +1,4 @@
-﻿"""S3/MinIO storage abstraction layer."""
+"""S3/MinIO storage abstraction layer."""
 
 from io import BytesIO
 

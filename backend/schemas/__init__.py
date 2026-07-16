@@ -1,4 +1,4 @@
-﻿"""Schemas package."""
+"""Schemas package."""
 from backend.schemas.admin_auth import AdminInfo, AdminLoginRequest, AdminLoginResponse
 from backend.schemas.category import (
     CategoryCreate,

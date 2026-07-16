@@ -1,4 +1,4 @@
-﻿"""Game repository 鈥?async data-access layer for games."""
+"""Game repository 鈥?async data-access layer for games."""
 
 import uuid
 from datetime import datetime, timezone

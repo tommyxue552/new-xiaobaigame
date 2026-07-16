@@ -1,4 +1,4 @@
-﻿"""Screenshot model for game preview images."""
+"""Screenshot model for game preview images."""
 
 import uuid
 

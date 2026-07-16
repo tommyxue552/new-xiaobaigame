@@ -1,4 +1,4 @@
-﻿"""Tag repository — async data-access layer for tags."""
+"""Tag repository — async data-access layer for tags."""
 
 import uuid
 from datetime import datetime, timezone

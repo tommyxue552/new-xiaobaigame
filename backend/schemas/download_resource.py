@@ -1,7 +1,6 @@
 """Download resource schemas — request/response models."""
 
 from datetime import datetime
-from typing import Optional
 import uuid
 
 from pydantic import BaseModel, Field

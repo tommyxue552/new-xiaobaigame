@@ -1,4 +1,4 @@
-﻿"""Custom middleware stack for the FastAPI application."""
+"""Custom middleware stack for the FastAPI application."""
 
 import time
 

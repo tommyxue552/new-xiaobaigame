@@ -1,4 +1,4 @@
-﻿"""Game entry model."""
+"""Game entry model."""
 
 import uuid
 from datetime import datetime

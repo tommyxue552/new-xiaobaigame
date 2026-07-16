@@ -1,4 +1,4 @@
-﻿"""SEO / sitemap schemas."""
+"""SEO / sitemap schemas."""
 
 from datetime import datetime
 from pydantic import BaseModel

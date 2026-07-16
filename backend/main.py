@@ -1,4 +1,4 @@
-﻿"""FastAPI Application Entry Point."""
+"""FastAPI Application Entry Point."""
 
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator

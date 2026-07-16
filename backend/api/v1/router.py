@@ -1,4 +1,4 @@
-﻿"""API v1 router that aggregates all endpoint routers."""
+"""API v1 router that aggregates all endpoint routers."""
 
 from fastapi import APIRouter
 
@@ -26,7 +26,7 @@ api_router = APIRouter()
 @api_router.get("/health", tags=["System"])
 async def health_check():
     """Kubernetes-style liveness probe."""
-    return {"status": "ok", "version": "1.0.0"}
+    return {"status": "ok", "version": "1.0.1"}
 
 
 # ---------------------------------------------------------------------------

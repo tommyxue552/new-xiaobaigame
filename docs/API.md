@@ -906,15 +906,17 @@ Update site settings. Only provided fields are updated.
 
 **Requires** Bearer Token (admin JWT).
 
-**Request Body** (all fields optional):
+**Request Body**:
 
  + '`json' + 
 {
-  "site_name": "New Site Name",
-  "site_description": "New description",
-  "seo_title": "SEO Title",
-  "seo_keywords": "keyword1,keyword2",
-  "seo_description": "SEO description text"
+  "settings": {
+    "site_name": "New Site Name",
+    "site_description": "New description",
+    "seo_title": "SEO Title",
+    "seo_keywords": "keyword1,keyword2",
+    "seo_description": "SEO description text"
+  }
 }
  + '`' + 
 

@@ -1,4 +1,4 @@
-﻿"""Category schemas for request/response validation."""
+"""Category schemas for request/response validation."""
 
 import uuid
 from datetime import datetime

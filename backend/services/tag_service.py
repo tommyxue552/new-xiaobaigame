@@ -1,4 +1,4 @@
-﻿"""Tag service — business logic for tag operations."""
+"""Tag service — business logic for tag operations."""
 
 import uuid
 from datetime import datetime, timezone

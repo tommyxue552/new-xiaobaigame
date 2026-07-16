@@ -1,4 +1,4 @@
-﻿"""Game API endpoints 鈥?public listing + admin CRUD."""
+"""Game API endpoints 鈥?public listing + admin CRUD."""
 
 import math
 import uuid

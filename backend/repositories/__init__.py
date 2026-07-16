@@ -1,4 +1,4 @@
-﻿"""Repositories package."""
+"""Repositories package."""
 from backend.repositories.category_repository import CategoryRepository
 from backend.repositories.download_provider_repository import DownloadProviderRepository
 from backend.repositories.download_resource_repository import DownloadResourceRepository

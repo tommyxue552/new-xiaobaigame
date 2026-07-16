@@ -22,7 +22,7 @@ export function CategorySection({
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-xl font-bold text-foreground">Categories</h2>
         <Link
-          href="/categories"
+          href="/"
           className="text-sm text-primary hover:underline"
         >
           View all
@@ -33,7 +33,7 @@ export function CategorySection({
         {entries.map((cat) => (
           <Link
             key={cat.id}
-            href={`/categories/${cat.slug}`}
+            href={`/category/${cat.slug}`}
             className="flex items-center gap-3 rounded-lg border border-border bg-card p-4 transition-shadow hover:shadow-md"
           >
             <FolderOpen className="h-5 w-5 shrink-0 text-muted-foreground" />

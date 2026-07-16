@@ -1,4 +1,4 @@
-﻿"""Setting schemas."""
+"""Setting schemas."""
 from pydantic import BaseModel, Field
 
 

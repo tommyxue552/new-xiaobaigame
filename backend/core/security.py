@@ -1,4 +1,4 @@
-﻿"""Core security utilities: JWT, password hashing, access control."""
+"""Core security utilities: JWT, password hashing, access control."""
 
 from datetime import datetime, timedelta, timezone
 

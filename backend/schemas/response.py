@@ -1,4 +1,4 @@
-﻿"""Unified API response format."""
+"""Unified API response format."""
 
 from typing import Any, Generic, TypeVar
 

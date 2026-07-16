@@ -1,4 +1,4 @@
-﻿"""Shared slug generation utilities for the application."""
+"""Shared slug generation utilities for the application."""
 
 import re
 import unicodedata

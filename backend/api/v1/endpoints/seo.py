@@ -1,4 +1,4 @@
-﻿"""SEO endpoints: sitemap data for dynamic sitemap generation."""
+"""SEO endpoints: sitemap data for dynamic sitemap generation."""
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
@@ -9,7 +9,7 @@ from backend.models.game import Game
 from backend.models.category import Category
 from backend.models.tag import Tag
 from backend.schemas.response import APIResponse
-from backend.schemas.seo import SitemapUrl, SitemapIndexEntry
+from backend.schemas.seo import SitemapUrl
 
 router = APIRouter(prefix="/seo", tags=["SEO"])
 

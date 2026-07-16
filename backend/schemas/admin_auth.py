@@ -1,4 +1,4 @@
-﻿"""Admin auth schemas."""
+"""Admin auth schemas."""
 from pydantic import BaseModel, Field
 
 

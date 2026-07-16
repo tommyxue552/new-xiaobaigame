@@ -1,4 +1,4 @@
-﻿"""add_category_id_to_games
+"""add_category_id_to_games
 
 Revision ID: 2026_07_15_0002
 Revises: 2026_07_15_0001

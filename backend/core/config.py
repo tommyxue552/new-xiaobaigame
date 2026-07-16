@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # Project
     PROJECT_NAME: str = "web-xiaobaigame"
-    VERSION: str = "1.0.0"
+    VERSION: str = "1.0.1"
     DEBUG: bool = False
 
     # API

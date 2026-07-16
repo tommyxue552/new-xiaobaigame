@@ -47,7 +47,6 @@ function PaginatedGameList({
   games: GameListItem[];
   page: number;
   totalPages: number;
-  basePath: string;
 }) {
   if (games.length === 0) {
     return (
@@ -119,7 +118,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             games={latestData.items}
             page={latestData.page}
             totalPages={latestData.total_pages}
-            basePath="/"
           />
         </section>
       </div>

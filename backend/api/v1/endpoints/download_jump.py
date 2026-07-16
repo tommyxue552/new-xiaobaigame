@@ -1,4 +1,4 @@
-﻿"""Download jump endpoint 鈥?public single download resource lookup for redirect/QR page."""
+"""Download jump endpoint 鈥?public single download resource lookup for redirect/QR page."""
 
 import uuid
 

@@ -1,4 +1,4 @@
-﻿"""Category API endpoints — public tree + admin CRUD."""
+"""Category API endpoints — public tree + admin CRUD."""
 
 import math
 import uuid

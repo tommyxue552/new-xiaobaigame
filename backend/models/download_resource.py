@@ -1,4 +1,4 @@
-﻿"""Download resource model linking games to download providers."""
+"""Download resource model linking games to download providers."""
 
 import uuid
 

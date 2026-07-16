@@ -1,4 +1,4 @@
-﻿"""Category repository — async data-access layer for categories."""
+"""Category repository — async data-access layer for categories."""
 
 import uuid
 from datetime import datetime, timezone

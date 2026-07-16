@@ -1,4 +1,4 @@
-﻿"""Category service — business logic for category operations."""
+"""Category service — business logic for category operations."""
 
 import uuid
 from datetime import datetime, timezone

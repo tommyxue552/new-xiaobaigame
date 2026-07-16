@@ -1,4 +1,4 @@
-﻿"""API v1 endpoints."""
+"""API v1 endpoints."""
 from backend.api.v1.endpoints import admin_auth
 from backend.api.v1.endpoints import categories
 from backend.api.v1.endpoints import dashboard

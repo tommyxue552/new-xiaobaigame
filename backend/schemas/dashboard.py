@@ -1,4 +1,4 @@
-﻿"""Dashboard stats schemas."""
+"""Dashboard stats schemas."""
 from pydantic import BaseModel
 
 

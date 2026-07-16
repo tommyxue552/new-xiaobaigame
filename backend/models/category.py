@@ -1,4 +1,4 @@
-﻿"""Category model with hierarchical parent support."""
+"""Category model with hierarchical parent support."""
 
 import uuid
 
